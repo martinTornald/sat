@@ -22,14 +22,20 @@ class Module extends \yii\base\Module
     public function getMenuItems()
     {
         $menuItemPresets = [
-            'admin'   => ['label' => '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', 'url' => ['/admin']],
-            'user'    => ['label' => '<i class="fa fa-users"></i> <span>Users</span>', 'url' => ['/user/admin']],
-            'packaii' => ['label' => '<i class="fa fa-cubes"></i> <span>Packages</span>', 'url' => ['/packaii']],
-            'gii'     => ['label' => '<i class="fa fa-code"></i> <span>Code Generation</span>', 'url' => ['/gii']],
+            'admin'   => ['label' => '<i class="fa fa-dashboard"></i> <span>Панель управления</span>', 'url' => ['/admin']],
+            'user'    => ['label' => '<i class="fa fa-users"></i> <span>Пользователи</span>', 'url' => ['/user/admin']],
+            'packaii' => ['label' => '<i class="fa fa-cubes"></i> <span>Пакеты</span>', 'url' => ['/packaii']],
+            'gii'     => ['label' => '<i class="fa fa-code"></i> <span>Генератор кода</span>', 'url' => ['/gii']],
         ];
 
-        $autoMenuItems = [];
+        $autoMenuItems = [
+            'owner'   => ['label' => '<i class="fa fa-user"></i> <span>Владельцы</span>', 'url' => ['/admin/owner']],
+            'insurance'   => ['label' => '<i class="fa fa-file-text-o"></i> <span>Страховые полисы</span>', 'url' => ['/admin/insurance']],
+            'car'   => ['label' => '<i class="fa fa-car"></i> <span>Машины</span>', 'url' => ['/admin/car']],
+        ];
+
         foreach (\Yii::$app->getModules() AS $name => $m) {
+
             switch ($name) {
                 case 'admin':
                 case 'user':
