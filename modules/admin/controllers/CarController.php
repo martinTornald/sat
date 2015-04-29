@@ -88,6 +88,8 @@ class CarController extends Controller
 		} else {
 			return $this->render('update', [
 				'model' => $model,
+                'owner' => Owner::find()->all(),
+                'insurance' => Insurance::find()->all(),
 			]);
 		}
 	}

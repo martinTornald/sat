@@ -36,7 +36,7 @@ dmstr\web\AdminLteAsset::register($this);
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= \Yii::$app->homeUrl ?>" class="logo">Phundament</a>
+        <a href="<?= \Yii::$app->homeUrl ?>" class="logo">Система перевозок</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
@@ -191,7 +191,7 @@ dmstr\web\AdminLteAsset::register($this);
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        Powered by <strong><a href="http://phundament.com">Phundament 4</a>
+        Разработал <strong><a href="#glebov">Киррил Глебов</a>
     </footer>
 </div>
 <!-- ./wrapper -->

@@ -9,7 +9,7 @@ use yii\grid\GridView;
 * @var app\modules\admin\models\OwnerSearch $searchModel
 */
 
-$this->title = 'Owners';
+$this->title = 'Владельцы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="clearfix">
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Owner', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить нового владельца', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'id'       => 'giiant-relations',
                     'encodeLabel' => false,
-                    'label'    => '<span class="glyphicon glyphicon-paperclip"></span> Relations',
+                    'label'    => '<span class="glyphicon glyphicon-paperclip"></span> Объекты',
                     'dropdown' => [
                         'options'      => [
                             'class' => 'dropdown-menu-right'
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items'        => [
     [
-        'label' => '<i class="glyphicon glyphicon-arrow-right"> Car</i>',
+        'label' => '<i class="glyphicon glyphicon-arrow-right"> Машины</i>',
         'url' => [
             'car/index',
         ],

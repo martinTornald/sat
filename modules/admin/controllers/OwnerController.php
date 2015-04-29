@@ -94,7 +94,7 @@ class OwnerController extends Controller
 	public function actionDelete($id)
 	{
 		$this->findModel($id)->delete();
-		return $this->redirect(Url::previous());
+		return $this->redirect(Url::to(['index']));
 	}
 
 	/**
