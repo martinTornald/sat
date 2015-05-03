@@ -50,7 +50,6 @@ class Module extends \yii\base\Module
         ];
 
         foreach (\Yii::$app->getModules() AS $name => $m) {
-
             switch ($name) {
                 case 'gii':
                 case 'debug':
