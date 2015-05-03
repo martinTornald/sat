@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = 'View';
     'attributes' => [
     			'id',
 			'passport',
-			'license',
 			'surname',
 			'name',
 			'patronymic',

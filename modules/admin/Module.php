@@ -25,7 +25,7 @@ class Module extends \yii\base\Module
             'admin'   => ['label' => '<i class="fa fa-dashboard"></i> <span>Панель управления</span>', 'url' => ['/admin']],
             'user'    => ['label' => '<i class="fa fa-users"></i> <span>Пользователи</span>', 'url' => ['/user/admin']],
             //'packaii' => ['label' => '<i class="fa fa-cubes"></i> <span>Пакеты</span>', 'url' => ['/packaii']],
-            //'gii'     => ['label' => '<i class="fa fa-code"></i> <span>Генератор кода</span>', 'url' => ['/gii']],
+            'gii'     => ['label' => '<i class="fa fa-code"></i> <span>Генератор кода</span>', 'url' => ['/gii']],
         ];
 
         $autoMenuItems = [
@@ -51,12 +51,13 @@ class Module extends \yii\base\Module
 
         foreach (\Yii::$app->getModules() AS $name => $m) {
             switch ($name) {
-                case 'gii':
-                case 'debug':
-                    break;
+
+                case 'debug': break;
+                case 'packaii': break;
+                case 'gii':  // break;
                 case 'admin':
                 case 'user':
-               // case 'packaii':
+
                     $menuItems[] = $menuItemPresets[$name];
                     break;
                 default:

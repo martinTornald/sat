@@ -1,7 +1,7 @@
 <?php
 
 namespace app\modules\admin\models;
-
+use app\modules\admin\models\License;
 use Yii;
 
 /**
@@ -9,4 +9,16 @@ use Yii;
  */
 class Driver extends \app\modules\admin\models\base\Driver
 {
+    /** @inheritdoc */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            $license = \Yii::createObject([
+                'class'          => License::className(),
+                'driver_id'      => $this->id,
+            ]);
+            $license->save(false);
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
 }

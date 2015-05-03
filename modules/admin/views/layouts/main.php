@@ -6,7 +6,7 @@ use dmstr\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-$this->title = $this->title.' [Backend] '.Yii::$app->params['appName'];
+$this->title = $this->title.' | '.Yii::$app->params['appName'];
 dmstr\web\AdminLteAsset::register($this);
 ?>
 
@@ -190,9 +190,7 @@ dmstr\web\AdminLteAsset::register($this);
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        Разработал <strong><a href="#glebov">Киррил Глебов</a>
-    </footer>
+    <footer class="main-footer"></footer>
 </div>
 <!-- ./wrapper -->
 

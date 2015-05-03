@@ -21,7 +21,6 @@ use yii\bootstrap\ActiveForm;
         <p>
             
 			<?= $form->field($model, 'passport')->textInput(['maxlength' => 255]) ?>
-			<?= $form->field($model, 'license')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($model, 'surname')->textInput(['maxlength' => 50]) ?>
 			<?= $form->field($model, 'name')->textInput(['maxlength' => 50]) ?>
 			<?= $form->field($model, 'patronymic')->textInput(['maxlength' => 50]) ?>

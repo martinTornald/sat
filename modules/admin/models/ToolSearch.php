@@ -19,8 +19,8 @@ class ToolSearch extends Model
 	public function rules()
 	{
 		return [
-			[['id', 'name'], 'integer'],
-			[['type', 'description'], 'safe'],
+			[['id'], 'integer'],
+			[['type', 'name', 'description'], 'safe'],
 		];
 	}
 
@@ -31,9 +31,9 @@ class ToolSearch extends Model
 	{
 		return [
 			'id' => 'ID',
-			'type' => 'Type',
-			'name' => 'Name',
-			'description' => 'Description',
+			'type' => 'Тип',
+			'name' => 'Наименование',
+			'description' => 'Описание',
 		];
 	}
 
@@ -50,10 +50,10 @@ class ToolSearch extends Model
 
 		$query->andFilterWhere([
             'id' => $this->id,
-            'name' => $this->name,
         ]);
 
 		$query->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
 		return $dataProvider;

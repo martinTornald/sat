@@ -21,7 +21,7 @@ use yii\bootstrap\ActiveForm;
         <p>
             
 			<?= $form->field($model, 'type')->textInput(['maxlength' => 255]) ?>
-			<?= $form->field($model, 'name')->textInput() ?>
+			<?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
         </p>
         <?php $this->endBlock(); ?>

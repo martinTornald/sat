@@ -21,13 +21,11 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'passport') ?>
 
-		<?= $form->field($model, 'license') ?>
-
 		<?= $form->field($model, 'surname') ?>
 
 		<?= $form->field($model, 'name') ?>
 
-		<?php // echo $form->field($model, 'patronymic') ?>
+		<?= $form->field($model, 'patronymic') ?>
 
 		<?php // echo $form->field($model, 'address') ?>
 

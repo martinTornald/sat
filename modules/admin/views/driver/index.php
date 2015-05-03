@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="pull-right">
 
 
-                                                                                
+                                                                                                            
             <?php 
             echo \yii\bootstrap\ButtonDropdown::widget(
                 [
@@ -43,6 +43,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'label' => '<i class="glyphicon glyphicon-arrow-right"> Driver Tool</i>',
         'url' => [
             'driver-tool/index',
+        ],
+    ],
+    [
+        'label' => '<i class="glyphicon glyphicon-arrow-left"> License</i>',
+        'url' => [
+            'license/index',
         ],
     ],
     [
@@ -64,12 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
         
 			'id',
 			'passport',
-			'license',
 			'surname',
 			'name',
 			'patronymic',
 			'address',
-			/*'phone'*/
+			'phone',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'urlCreator' => function($action, $model, $key, $index) {

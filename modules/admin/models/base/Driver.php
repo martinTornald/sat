@@ -9,7 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property string $passport
- * @property string $license
  * @property string $surname
  * @property string $name
  * @property string $patronymic
@@ -17,6 +16,7 @@ use Yii;
  * @property string $phone
  *
  * @property DriverTool[] $driverTools
+ * @property License $license
  * @property Voyage[] $voyages
  */
 class Driver extends \yii\db\ActiveRecord
@@ -35,8 +35,8 @@ class Driver extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['passport', 'license', 'surname', 'name', 'patronymic', 'address', 'phone'], 'required'],
-            [['passport', 'license', 'address', 'phone'], 'string', 'max' => 255],
+            [['passport', 'surname', 'name', 'patronymic', 'address', 'phone'], 'required'],
+            [['passport', 'address', 'phone'], 'string', 'max' => 255],
             [['surname', 'name', 'patronymic'], 'string', 'max' => 50]
         ];
     }
@@ -49,7 +49,6 @@ class Driver extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'passport' => Yii::t('app', 'Паспорт'),
-            'license' => Yii::t('app', 'Лицензия'),
             'surname' => Yii::t('app', 'Фамилия'),
             'name' => Yii::t('app', 'Имя'),
             'patronymic' => Yii::t('app', 'Отчество'),
@@ -64,6 +63,14 @@ class Driver extends \yii\db\ActiveRecord
     public function getDriverTools()
     {
         return $this->hasMany(\app\modules\admin\models\DriverTool::className(), ['driver_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLicense()
+    {
+        return $this->hasOne(\app\modules\admin\models\License::className(), ['driver_id' => 'id']);
     }
 
     /**

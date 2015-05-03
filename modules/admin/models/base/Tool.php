@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $type
- * @property integer $name
+ * @property string $name
  * @property string $description
  *
  * @property DriverTool[] $driverTools
@@ -31,9 +31,8 @@ class Tool extends \yii\db\ActiveRecord
     {
         return [
             [['type', 'name'], 'required'],
-            [['name'], 'integer'],
             [['description'], 'string'],
-            [['type'], 'string', 'max' => 255]
+            [['type', 'name'], 'string', 'max' => 255]
         ];
     }
 
@@ -44,9 +43,9 @@ class Tool extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'type' => Yii::t('app', 'Type'),
-            'name' => Yii::t('app', 'Name'),
-            'description' => Yii::t('app', 'Description'),
+            'type' => Yii::t('app', 'Тип'),
+            'name' => Yii::t('app', 'Наименование'),
+            'description' => Yii::t('app', 'Описание'),
         ];
     }
 

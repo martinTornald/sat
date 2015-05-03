@@ -13,7 +13,6 @@ class DriverSearch extends Model
 {
 	public $id;
 	public $passport;
-	public $license;
 	public $surname;
 	public $name;
 	public $patronymic;
@@ -24,7 +23,7 @@ class DriverSearch extends Model
 	{
 		return [
 			[['id'], 'integer'],
-			[['passport', 'license', 'surname', 'name', 'patronymic', 'address', 'phone'], 'safe'],
+			[['passport', 'surname', 'name', 'patronymic', 'address', 'phone'], 'safe'],
 		];
 	}
 
@@ -36,7 +35,6 @@ class DriverSearch extends Model
 		return [
 			'id' => 'ID',
 			'passport' => 'Паспорт',
-			'license' => 'Лицензия',
 			'surname' => 'Фамилия',
 			'name' => 'Имя',
 			'patronymic' => 'Отчество',
@@ -61,7 +59,6 @@ class DriverSearch extends Model
         ]);
 
 		$query->andFilterWhere(['like', 'passport', $this->passport])
-            ->andFilterWhere(['like', 'license', $this->license])
             ->andFilterWhere(['like', 'surname', $this->surname])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'patronymic', $this->patronymic])
