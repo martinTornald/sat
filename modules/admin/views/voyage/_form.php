@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
-
+use yii\bootstrap\Nav;
 /**
  * @var yii\web\View $this
  * @var app\modules\admin\models\Voyage $model
@@ -13,11 +13,22 @@ use yii\bootstrap\ActiveForm;
 
 <div class="voyage-form">
 
+    <?= Nav::widget([
+        'options' => [
+            'class' => 'nav-pills'
+        ],
+        'items' => [
+            ['label' => 'Перевозка', 'url' => ['/admin/voyage/update', 'id' => $model->id]],
+            ['label' => 'Стоимость перевозок', 'url' => ['/admin/cost/update', 'voyage_id' => $model->id]],
+
+        ]
+    ]) ?>
+
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'enableClientValidation' => false]); ?>
 
     <div class="">
         <?php echo $form->errorSummary($model); ?>
-        <?php $this->beginBlock('main'); ?>
+
 
         <p>
             <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
@@ -39,20 +50,7 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
         </p>
-        <?php $this->endBlock(); ?>
 
-        <?=
-        \yii\bootstrap\Tabs::widget(
-            [
-                'encodeLabels' => false,
-                'items' => [[
-                    'label' => 'Voyage',
-                    'content' => $this->blocks['main'],
-                    'active' => true,
-                ],]
-            ]
-        );
-        ?>
         <hr/>
 
         <?= Html::submitButton('<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord ? 'Create' : 'Save'), ['class' => $model->isNewRecord ?
