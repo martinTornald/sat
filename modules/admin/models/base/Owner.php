@@ -8,13 +8,14 @@ use Yii;
  * This is the base-model class for table "owner".
  *
  * @property integer $id
- * @property string $passport
  * @property string $surname
  * @property string $name
  * @property string $patronymic
+ * @property string $passport
  * @property string $phone
  *
  * @property Car[] $cars
+ * @property Trailer[] $trailers
  */
 class Owner extends \yii\db\ActiveRecord
 {
@@ -32,9 +33,9 @@ class Owner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['passport', 'surname', 'name', 'patronymic', 'phone'], 'required'],
-            [['passport', 'phone'], 'string', 'max' => 255],
-            [['surname', 'name', 'patronymic'], 'string', 'max' => 50]
+            [['surname', 'name', 'patronymic', 'passport', 'phone'], 'required'],
+            [['surname', 'name', 'patronymic'], 'string', 'max' => 50],
+            [['passport', 'phone'], 'string', 'max' => 255]
         ];
     }
 
@@ -45,10 +46,10 @@ class Owner extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'passport' => Yii::t('app', 'Паспорт'),
             'surname' => Yii::t('app', 'Фамилия'),
             'name' => Yii::t('app', 'Имя'),
             'patronymic' => Yii::t('app', 'Отчество'),
+            'passport' => Yii::t('app', 'Паспорт'),
             'phone' => Yii::t('app', 'Телефон'),
         ];
     }
@@ -59,5 +60,13 @@ class Owner extends \yii\db\ActiveRecord
     public function getCars()
     {
         return $this->hasMany(\app\modules\admin\models\Car::className(), ['owner_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTrailers()
+    {
+        return $this->hasMany(\app\modules\admin\models\Trailer::className(), ['owner_id' => 'id']);
     }
 }

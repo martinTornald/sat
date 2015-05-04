@@ -2,13 +2,28 @@
 
 namespace app\modules\admin\models;
 
+use app\components\DateTimeStampBehavior;
 use Yii;
+use yii\db\BaseActiveRecord;
 
 /**
  * This is the model class for table "voyage".
  */
 class Voyage extends \app\modules\admin\models\base\Voyage
 {
+    public function behaviors()
+    {
+        return [
+            'DateTimeStampBehavior' => [
+                'class' => DateTimeStampBehavior::className(),
+                'attributes' => [
+                    BaseActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+                    BaseActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                ]
+            ]
+        ];
+    }
+
     /** @inheritdoc */
     public function afterSave($insert, $changedAttributes)
     {

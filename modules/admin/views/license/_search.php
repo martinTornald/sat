@@ -5,35 +5,29 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\admin\models\TrailerSearch $model
+ * @var app\modules\admin\models\LicenseSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
 
-<div class="trailer-search">
+<div class="license-search">
 
 	<?php $form = ActiveForm::begin([
 		'action' => ['index'],
 		'method' => 'get',
 	]); ?>
 
-		<?= $form->field($model, 'id') ?>
-
-		<?= $form->field($model, 'owner_id') ?>
-
-		<?= $form->field($model, 'make_model') ?>
+		<?= $form->field($model, 'driver_id') ?>
 
 		<?= $form->field($model, 'number') ?>
 
 		<?= $form->field($model, 'type') ?>
 
-		<?php // echo $form->field($model, 'year') ?>
+		<?= $form->field($model, 'description') ?>
 
-		<?php // echo $form->field($model, 'reg_number') ?>
+		<?= $form->field($model, 'date_of_issue') ?>
 
-		<?php // echo $form->field($model, 'reg_certificate') ?>
-
-		<?php // echo $form->field($model, 'photo') ?>
+		<?php // echo $form->field($model, 'term') ?>
 
 		<div class="form-group">
 			<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

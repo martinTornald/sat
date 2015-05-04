@@ -5,12 +5,12 @@ use yii\bootstrap\ActiveForm;
 
 /**
 * @var yii\web\View $this
-* @var app\modules\admin\models\Owner $model
+* @var app\modules\admin\models\License $model
 * @var yii\widgets\ActiveForm $form
 */
 ?>
 
-<div class="owner-form">
+<div class="license-form">
 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'enableClientValidation' => false]); ?>
 
@@ -20,11 +20,12 @@ use yii\bootstrap\ActiveForm;
 
         <p>
             
-			<?= $form->field($model, 'surname')->textInput(['maxlength' => 50]) ?>
-			<?= $form->field($model, 'name')->textInput(['maxlength' => 50]) ?>
-			<?= $form->field($model, 'patronymic')->textInput(['maxlength' => 50]) ?>
-			<?= $form->field($model, 'passport')->textInput(['maxlength' => 255]) ?>
-			<?= $form->field($model, 'phone')->textInput(['maxlength' => 255]) ?>
+			<?= $form->field($model, 'driver_id')->textInput() ?>
+			<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+			<?= $form->field($model, 'date_of_issue')->textInput() ?>
+			<?= $form->field($model, 'term')->textInput() ?>
+			<?= $form->field($model, 'number')->textInput(['maxlength' => 50]) ?>
+			<?= $form->field($model, 'type')->textInput(['maxlength' => 255]) ?>
         </p>
         <?php $this->endBlock(); ?>
         
@@ -33,7 +34,7 @@ use yii\bootstrap\ActiveForm;
                  [
                    'encodeLabels' => false,
                      'items' => [ [
-    'label'   => 'Owner',
+    'label'   => 'License',
     'content' => $this->blocks['main'],
     'active'  => true,
 ], ]

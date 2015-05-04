@@ -42,8 +42,8 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'company' => Yii::t('app', 'Имя'),
-            'name' => Yii::t('app', 'Компания'),
+            'company' => Yii::t('app', 'Компания'),
+            'name' => Yii::t('app', 'Имя'),
             'phone' => Yii::t('app', 'Телефон'),
         ];
     }

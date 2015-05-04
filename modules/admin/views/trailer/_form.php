@@ -20,8 +20,8 @@ use yii\bootstrap\ActiveForm;
 
         <p>
             
+			<?= $form->field($model, 'owner_id')->textInput() ?>
 			<?= $form->field($model, 'year')->textInput(['maxlength' => 4]) ?>
-			<?= $form->field($model, 'id_owner')->textInput() ?>
 			<?= $form->field($model, 'make_model')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($model, 'type')->textInput(['maxlength' => 255]) ?>
 			<?= $form->field($model, 'reg_number')->textInput(['maxlength' => 255]) ?>

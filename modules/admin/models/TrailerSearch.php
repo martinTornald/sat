@@ -12,19 +12,19 @@ use app\modules\admin\models\Trailer;
 class TrailerSearch extends Model
 {
 	public $id;
+	public $owner_id;
 	public $make_model;
 	public $number;
 	public $type;
 	public $year;
 	public $reg_number;
 	public $reg_certificate;
-	public $id_owner;
 	public $photo;
 
 	public function rules()
 	{
 		return [
-			[['id', 'id_owner'], 'integer'],
+			[['id', 'owner_id'], 'integer'],
 			[['make_model', 'number', 'type', 'year', 'reg_number', 'reg_certificate', 'photo'], 'safe'],
 		];
 	}
@@ -36,13 +36,13 @@ class TrailerSearch extends Model
 	{
 		return [
 			'id' => 'ID',
+			'owner_id' => 'Владелец',
 			'make_model' => 'Модель',
 			'number' => 'Номер',
 			'type' => 'Тип',
 			'year' => 'Год выпуска',
 			'reg_number' => 'Регистрационный номер',
 			'reg_certificate' => 'Регистрационный сертификат',
-			'id_owner' => 'Владелец',
 			'photo' => 'Фото',
 		];
 	}
@@ -60,8 +60,8 @@ class TrailerSearch extends Model
 
 		$query->andFilterWhere([
             'id' => $this->id,
+            'owner_id' => $this->owner_id,
             'year' => $this->year,
-            'id_owner' => $this->id_owner,
         ]);
 
 		$query->andFilterWhere(['like', 'make_model', $this->make_model])

@@ -9,4 +9,8 @@ use Yii;
  */
 class Trailer extends \app\modules\admin\models\base\Trailer
 {
+    public function getFullName()
+    {
+        return $this->make_model . ' (' . $this->reg_number . ', ' . $this->type . ')';
+    }
 }

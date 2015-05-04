@@ -12,17 +12,17 @@ use app\modules\admin\models\Owner;
 class OwnerSearch extends Model
 {
 	public $id;
-	public $passport;
 	public $surname;
 	public $name;
 	public $patronymic;
+	public $passport;
 	public $phone;
 
 	public function rules()
 	{
 		return [
 			[['id'], 'integer'],
-			[['passport', 'surname', 'name', 'patronymic', 'phone'], 'safe'],
+			[['surname', 'name', 'patronymic', 'passport', 'phone'], 'safe'],
 		];
 	}
 
@@ -33,10 +33,10 @@ class OwnerSearch extends Model
 	{
 		return [
 			'id' => 'ID',
-			'passport' => 'Паспорт',
 			'surname' => 'Фамилия',
 			'name' => 'Имя',
 			'patronymic' => 'Отчество',
+			'passport' => 'Паспорт',
 			'phone' => 'Телефон',
 		];
 	}
@@ -56,10 +56,10 @@ class OwnerSearch extends Model
             'id' => $this->id,
         ]);
 
-		$query->andFilterWhere(['like', 'passport', $this->passport])
-            ->andFilterWhere(['like', 'surname', $this->surname])
+		$query->andFilterWhere(['like', 'surname', $this->surname])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'patronymic', $this->patronymic])
+            ->andFilterWhere(['like', 'passport', $this->passport])
             ->andFilterWhere(['like', 'phone', $this->phone]);
 
 		return $dataProvider;

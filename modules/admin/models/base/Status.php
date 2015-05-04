@@ -29,7 +29,6 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type'], 'required'],
             [['type'], 'integer'],
             [['description'], 'string']
         ];

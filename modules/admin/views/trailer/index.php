@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="pull-right">
 
 
-                                                    
+                                                                                
             <?php 
             echo \yii\bootstrap\ButtonDropdown::widget(
                 [
@@ -39,6 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'encodeLabels' => false,
                         'items'        => [
+    [
+        'label' => '<i class="glyphicon glyphicon-arrow-left"> Owner</i>',
+        'url' => [
+            'owner/index',
+        ],
+    ],
     [
         'label' => '<i class="glyphicon glyphicon-arrow-right"> Voyage</i>',
         'url' => [
@@ -57,13 +63,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
         
 			'id',
+			'owner_id',
 			'make_model',
 			'number',
 			'type',
 			'year',
 			'reg_number',
-			'reg_certificate',
-			/*'id_owner'*/
+			/*'reg_certificate'*/
 			/*'photo'*/
             [
                 'class' => 'yii\grid\ActionColumn',

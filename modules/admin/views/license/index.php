@@ -6,27 +6,27 @@ use yii\grid\GridView;
 /**
 * @var yii\web\View $this
 * @var yii\data\ActiveDataProvider $dataProvider
-* @var app\modules\admin\models\OwnerSearch $searchModel
+* @var app\modules\admin\models\LicenseSearch $searchModel
 */
 
-$this->title = 'Owners';
+$this->title = 'Licenses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="owner-index">
+<div class="license-index">
 
     <?php //     echo $this->render('_search', ['model' =>$searchModel]);
     ?>
 
     <div class="clearfix">
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Owner', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New License', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">
 
 
-                                                                                
+                                                    
             <?php 
             echo \yii\bootstrap\ButtonDropdown::widget(
                 [
@@ -40,15 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items'        => [
     [
-        'label' => '<i class="glyphicon glyphicon-arrow-right"> Car</i>',
+        'label' => '<i class="glyphicon glyphicon-arrow-left"> Driver</i>',
         'url' => [
-            'car/index',
-        ],
-    ],
-    [
-        'label' => '<i class="glyphicon glyphicon-arrow-right"> Trailer</i>',
-        'url' => [
-            'trailer/index',
+            'driver/index',
         ],
     ],
 ]                    ],
@@ -62,12 +56,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
         
-			'id',
-			'surname',
-			'name',
-			'patronymic',
-			'passport',
-			'phone',
+			'driver_id',
+			'number',
+			'type',
+			'description:ntext',
+			'date_of_issue',
+			'term',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'urlCreator' => function($action, $model, $key, $index) {

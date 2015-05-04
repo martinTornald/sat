@@ -9,8 +9,8 @@ use Yii;
  */
 class Owner extends \app\modules\admin\models\base\Owner
 {
-    public function getfullName()
+    public function getFullName()
     {
-        return $this->surname.' '.$this->name.' '.$this->patronymic;
+        return $this->surname . ' ' . $this->name . ' ' . $this->patronymic;
     }
 }

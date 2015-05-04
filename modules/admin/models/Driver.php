@@ -8,6 +8,16 @@ use Yii;
  */
 class Driver extends \app\modules\admin\models\base\Driver
 {
+    /**
+     * Возвращает полное имя владельца
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->surname . ' ' . $this->name . ' ' . $this->patronymic;
+    }
+
     /** @inheritdoc */
     public function afterSave($insert, $changedAttributes)
     {

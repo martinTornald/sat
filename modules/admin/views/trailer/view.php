@@ -39,13 +39,13 @@ $this->params['breadcrumbs'][] = 'View';
     'model' => $model,
     'attributes' => [
     			'id',
+			'owner_id',
 			'make_model',
 			'number',
 			'type',
 			'year',
 			'reg_number',
 			'reg_certificate',
-			'id_owner',
 			'photo',
     ],
     ]); ?>

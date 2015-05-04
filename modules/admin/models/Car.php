@@ -9,4 +9,8 @@ use Yii;
  */
 class Car extends \app\modules\admin\models\base\Car
 {
+    public function getFullName()
+    {
+        return $this->make_model . ' (' . $this->reg_number . ', ' . $this->color . ')';
+    }
 }

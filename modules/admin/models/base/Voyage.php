@@ -15,7 +15,7 @@ use Yii;
  * @property integer $status_id
  * @property string $name
  * @property string $description
- * @property string $updated
+ * @property string $updated_at
  * @property string $created_at
  *
  * @property Cost $cost
@@ -50,7 +50,7 @@ class Voyage extends \yii\db\ActiveRecord
         return [
             [['customer_id', 'car_id', 'trailer_id', 'driver_id', 'status_id'], 'integer'],
             [['description'], 'string'],
-            [['updated', 'created_at'], 'safe'],
+            [['updated_at', 'created_at'], 'safe'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -69,7 +69,7 @@ class Voyage extends \yii\db\ActiveRecord
             'status_id' => Yii::t('app', 'Статус'),
             'name' => Yii::t('app', 'Название перевозки'),
             'description' => Yii::t('app', 'Описание перевозки'),
-            'updated' => Yii::t('app', 'Дата обновления'),
+            'updated_at' => Yii::t('app', 'Дата обновления'),
             'created_at' => Yii::t('app', 'Дата создания'),
         ];
     }

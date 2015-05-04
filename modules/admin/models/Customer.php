@@ -9,4 +9,13 @@ use Yii;
  */
 class Customer extends \app\modules\admin\models\base\Customer
 {
+    /**
+     * Возвращает полное имя заказчика
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->name.' ('.$this->company .' )';
+    }
 }

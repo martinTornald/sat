@@ -2,8 +2,15 @@
 
 namespace app\modules\admin\controllers;
 
+use app\components\DateTimeStampBehavior;
+use app\modules\admin\models\Car;
+use app\modules\admin\models\Customer;
+use app\modules\admin\models\Driver;
+use app\modules\admin\models\Status;
+use app\modules\admin\models\Trailer;
 use app\modules\admin\models\Voyage;
 use app\modules\admin\models\VoyageSearch;
+use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -15,6 +22,7 @@ use yii\helpers\Url;
  */
 class VoyageController extends Controller
 {
+
 	/**
 	 * Lists all Voyage models.
 	 * @return mixed
@@ -63,7 +71,14 @@ class VoyageController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
-        return $this->render('create', ['model' => $model,]);
+        return $this->render('create', [
+            'model' => $model,
+            'customers'     => Customer::find()->all(),
+            'cars'          => Car::find()->all(),
+            'trailers'      => Trailer::find()->all(),
+            'drivers'       => Driver::find()->all(),
+            'statuses'      => Status::find()->all(),
+        ]);
 	}
 
 	/**

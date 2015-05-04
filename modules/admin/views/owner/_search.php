@@ -19,13 +19,13 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'id') ?>
 
-		<?= $form->field($model, 'passport') ?>
-
 		<?= $form->field($model, 'surname') ?>
 
 		<?= $form->field($model, 'name') ?>
 
 		<?= $form->field($model, 'patronymic') ?>
+
+		<?= $form->field($model, 'passport') ?>
 
 		<?php // echo $form->field($model, 'phone') ?>
 
