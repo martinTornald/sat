@@ -175,10 +175,12 @@ dmstr\web\AdminLteAsset::register($this);
             <h1>
                 <small><?= $this->title ?></small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+            <?php
+                echo Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]);
+            ?>
+
         </section>
 
         <!-- Main content -->

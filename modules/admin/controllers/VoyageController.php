@@ -95,7 +95,12 @@ class VoyageController extends Controller
             return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
-				'model' => $model,
+				'model'         => $model,
+                'customers'     => Customer::find()->all(),
+                'cars'          => Car::find()->all(),
+                'trailers'      => Trailer::find()->all(),
+                'drivers'       => Driver::find()->all(),
+                'statuses'      => Status::find()->all(),
 			]);
 		}
 	}
