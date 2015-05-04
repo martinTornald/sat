@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\admin\models;
-use app\modules\admin\models\License;
 use Yii;
 
 /**
