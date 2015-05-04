@@ -17,9 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Account' => 'Аккаунт',
-    'Account confirmation' => 'Активация аккаунта',
-    'Account details' => 'Аккаунт',
-    'Account details have been updated' => 'Аккаунт пользователя был обновлен',
-    'Account settings' => 'Настройки аккаунта',
+    'Owner' => 'Владелец',
+    'Owners' => 'Владелецы',
 ];

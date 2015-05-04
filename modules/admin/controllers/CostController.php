@@ -80,7 +80,7 @@ class CostController extends Controller
             return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
-				'model' => $model,
+				'model' => $model
 			]);
 		}
 	}

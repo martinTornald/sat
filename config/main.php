@@ -7,7 +7,8 @@ $config = [
     'aliases'    => [
         '@admin-views' => '@app/modules/admin/views'
     ],
-    'language' => 'ru',
+    'sourceLanguage'=>'en',
+    'language'=>'ru',
     'components' => [
         'assetManager' => [
             'forceCopy'  => false, // Note: May degrade performance with Docker or VMs

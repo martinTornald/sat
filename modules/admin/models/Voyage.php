@@ -41,7 +41,7 @@ class Voyage extends \app\modules\admin\models\base\Voyage
                 'class'          => CostDriver::className(),
                 'voyage_id'      => $this->id,
             ]);
-            $cost->save(false);
+            $costDriver->save(false);
 
             // Создание записи маршрута для перевозки
             $distance = \Yii::createObject([

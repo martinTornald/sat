@@ -11,18 +11,10 @@ use yii\bootstrap\Nav;
  */
 ?>
 
+<!-- VOYAGE-FORM -->
 <div class="voyage-form">
 
-    <?= Nav::widget([
-        'options' => [
-            'class' => 'nav-pills'
-        ],
-        'items' => [
-            ['label' => 'Перевозка', 'url' => ['/admin/voyage/update', 'id' => $model->id]],
-            ['label' => 'Стоимость перевозок', 'url' => ['/admin/cost/update', 'voyage_id' => $model->id]],
-
-        ]
-    ]) ?>
+    <?= $this->render('_nav', ['id' => $model->id]) ?>
 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'enableClientValidation' => false]); ?>
 
@@ -61,3 +53,4 @@ use yii\bootstrap\Nav;
     </div>
 
 </div>
+<!-- //VOYAGE-FORM -->
