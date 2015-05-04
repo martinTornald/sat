@@ -1,0 +1,49 @@
+/* columns of same height styles */
+.row-same-height {
+  display: table;
+  width: 100%;
+}
+
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: @screen-sm) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: @screen-md) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: @screen-lg) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+
+/* firefox fix */
+.img-responsive {
+  width: 100%;
+}
+
+/* vertical alignment styles */
+.col {
+  &-top {
+    vertical-align: top;
+  }
+
+  &-middle {
+    vertical-align: middle;
+  }
+
+  &-bottom {
+    vertical-align: bottom;
+  }
+}

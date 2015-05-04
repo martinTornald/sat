@@ -3,11 +3,13 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
+use app\modules\admin\assets\AdminAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 $this->title = $this->title.' | '.Yii::$app->params['appName'];
 dmstr\web\AdminLteAsset::register($this);
+AdminAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>
