@@ -63,6 +63,30 @@ $this->params['breadcrumbs'][] = 'View';
 
 
     <?php $this->beginBlock('Cars'); ?>
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->cars,
+    ]);
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'number',
+            'make_model',
+            'color',
+            'year',
+            'reg_number',
+            'reg_certificate',
+            'mileage',
+            'photo',
+            'cost',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'controller' => 'car'
+            ],
+        ],
+    ]); ?>
     <p class='pull-right'>
         <?= \yii\helpers\Html::a(
             '<span class="glyphicon glyphicon-list"></span> List All Cars',

@@ -12,10 +12,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Машины', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактирование';
 ?>
+
+<!-- CAR-UPDATE -->
 <div class="car-update">
 
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> Просмотр', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     </p>
 
 	<?php echo $this->render('_form', [
@@ -25,3 +27,4 @@ $this->params['breadcrumbs'][] = 'Редактирование';
 	]); ?>
 
 </div>
+<!-- //CAR-UPDATE -->

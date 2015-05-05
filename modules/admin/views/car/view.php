@@ -4,98 +4,125 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
+use yii\data\ArrayDataProvider;
 
 /**
-* @var yii\web\View $this
-* @var app\modules\admin\models\Car $model
-*/
+ * @var yii\web\View $this
+ * @var app\modules\admin\models\Car $model
+ */
 
-$this->title = 'Car View ' . $model->id . '';
-$this->params['breadcrumbs'][] = ['label' => 'Cars', 'url' => ['index']];
+$this->title = 'Просмотр машины ' . $model->id . '';
+$this->params['breadcrumbs'][] = ['label' => 'Машины', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'View';
 ?>
+
+<!-- CAR-VIEW -->
 <div class="car-view">
 
     <p class='pull-left'>
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'id' => $model->id],
-        ['class' => 'btn btn-info']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Car', ['create'], ['class' => 'btn
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Редактировать', ['update', 'id' => $model->id],
+            ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить', ['create'], ['class' => 'btn
         btn-success']) ?>
     </p>
 
-        <p class='pull-right'>
-        <?= Html::a('<span class="glyphicon glyphicon-list"></span> List', ['index'], ['class'=>'btn btn-default']) ?>
-    </p><div class='clearfix'></div> 
+    <p class='pull-right'>
+        <?= Html::a('<span class="glyphicon glyphicon-list"></span> Полный список', ['index'], ['class' => 'btn btn-default']) ?>
+    </p>
 
-    
-    <h3>
-        <?= $model->id ?>    </h3>
-
+    <div class='clearfix'></div>
 
     <?php $this->beginBlock('app\modules\admin\models\Car'); ?>
 
     <?php echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-    			'id',
-			'owner_id',
-			'insurance_id',
-			'make_model',
-			'number',
-			'color',
-			'year',
-			'reg_number',
-			'reg_certificate',
-			'mileage',
-			'photo',
-			'cost',
-    ],
+        'model' => $model,
+        'attributes' => [
+            'id',
+            [
+                'label' => 'Владелец',
+                'format'=>'raw',
+                'value' => Html::a($model->owner->fullName, ['/admin/owner/view', 'id' => $model->owner->id]),
+            ],
+            [
+                'label' => 'Страховка',
+                'format'=>'raw',
+                'value' => Html::a($model->insurance->name, ['/admin/insurance/view', 'id' => $model->insurance->id]),
+            ],
+            'make_model',
+            'number',
+            'color',
+            'year',
+            'reg_number',
+            'reg_certificate',
+            'mileage',
+            'photo',
+            'cost',
+        ],
     ]); ?>
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'id' => $model->id],
-    [
-    'class' => 'btn btn-danger',
-    'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
-    'data-method' => 'post',
-    ]); ?>
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Удалить', ['delete', 'id' => $model->id],
+        [
+            'class' => 'btn btn-danger',
+            'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
+            'data-method' => 'post',
+        ]); ?>
 
     <?php $this->endBlock(); ?>
 
+    <?php $this->beginBlock('Voyages'); ?>
 
-    
-<?php $this->beginBlock('Voyages'); ?>
-<p class='pull-right'>
-  <?= \yii\helpers\Html::a(
-            '<span class="glyphicon glyphicon-list"></span> List All Voyages',
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->voyages,
+    ]);
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'controller' => 'voyage'
+            ],
+        ],
+    ]); ?>
+
+    <p class='pull-right'>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-list"></span> Полный список перевозок',
             ['voyage/index'],
-            ['class'=>'btn text-muted btn-xs']
+            ['class' => 'btn text-muted btn-xs']
         ) ?>
-  <?= \yii\helpers\Html::a(
-            '<span class="glyphicon glyphicon-plus"></span> New Voyage',
-            ['voyage/create', 'Voyage'=>['car_id'=>$model->id]],
-            ['class'=>'btn btn-success btn-xs']
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> Новая перевозка',
+            ['voyage/create', 'Voyage' => ['car_id' => $model->id]],
+            ['class' => 'btn btn-success btn-xs']
         ) ?>
-</p><div class='clearfix'></div>
-<?php $this->endBlock() ?>
+    </p>
+
+    <div class='clearfix'></div>
+    <?php $this->endBlock() ?>
 
 
     <?=
     \yii\bootstrap\Tabs::widget(
-                 [
-                     'id' => 'relation-tabs',
-                     'encodeLabels' => false,
-                     'items' => [ [
-    'label'   => '<span class="glyphicon glyphicon-asterisk"></span> Car',
-    'content' => $this->blocks['app\modules\admin\models\Car'],
-    'active'  => true,
-],[
-    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Voyages</small>',
-    'content' => $this->blocks['Voyages'],
-    'active'  => false,
-], ]
-                 ]
+        [
+            'id' => 'relation-tabs',
+            'encodeLabels' => false,
+            'items' => [[
+                'label' => '<span class="glyphicon glyphicon-asterisk"></span> Информация о машине',
+                'content' => $this->blocks['app\modules\admin\models\Car'],
+                'active' => true,
+            ], [
+                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Перевозки</small>',
+                'content' => $this->blocks['Voyages'],
+                'active' => false,
+            ],]
+        ]
     );
-    ?></div>
+    ?>
+</div>
+<!-- //CAR-VIEW -->

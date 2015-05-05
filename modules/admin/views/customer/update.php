@@ -7,15 +7,16 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Customer $model
  */
 
-$this->title = 'Customer Update ' . $model->name . '';
-$this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
+$this->title = 'Редактировать информацию о заказчике ' . $model->name . '';
+$this->params['breadcrumbs'][] = ['label' => 'Заказчики', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Edit';
 ?>
+
+<!-- CUSTOMER-UPDATE -->
 <div class="customer-update">
 
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> Просмотреть', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     </p>
 
 	<?php echo $this->render('_form', [
@@ -23,3 +24,4 @@ $this->params['breadcrumbs'][] = 'Edit';
 	]); ?>
 
 </div>
+<!-- //CUSTOMER-UPDATE -->

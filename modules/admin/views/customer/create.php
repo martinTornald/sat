@@ -7,10 +7,12 @@ use yii\helpers\Html;
 * @var app\modules\admin\models\Customer $model
 */
 
-$this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
+$this->title = 'Создание клиента';
+$this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<!-- CUSTOMER-CREATE -->
 <div class="customer-create">
 
     <p class="pull-left">
@@ -23,3 +25,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+<!-- //CUSTOMER-CREATE -->
