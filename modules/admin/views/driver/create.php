@@ -7,14 +7,16 @@ use yii\helpers\Html;
 * @var app\modules\admin\models\Driver $model
 */
 
-$this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Drivers', 'url' => ['index']];
+$this->title = 'Создание нового водителя';
+$this->params['breadcrumbs'][] = ['label' => 'Водители', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<!-- DRIVER-CREATE -->
 <div class="driver-create">
 
     <p class="pull-left">
-        <?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Отмена', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
     </p>
     <div class="clearfix"></div>
 
@@ -23,3 +25,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+<!-- //DRIVER-CREATE -->

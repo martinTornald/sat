@@ -7,15 +7,16 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Driver $model
  */
 
-$this->title = 'Driver Update ' . $model->name . '';
-$this->params['breadcrumbs'][] = ['label' => 'Drivers', 'url' => ['index']];
+$this->title = 'Редактирвоание водителя ' . $model->name . '';
+$this->params['breadcrumbs'][] = ['label' => 'Водители', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Edit';
 ?>
+
+<!-- DRIVER-UPDATE -->
 <div class="driver-update">
 
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> Посмотреть', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     </p>
 
 	<?php echo $this->render('_form', [
@@ -23,3 +24,4 @@ $this->params['breadcrumbs'][] = 'Edit';
 	]); ?>
 
 </div>
+<!-- //DRIVER-UPDATE -->
