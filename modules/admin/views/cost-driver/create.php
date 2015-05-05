@@ -14,11 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="cost-driver-create">
 
     <p class="pull-left">
-        <?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Отмена', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
     </p>
     <div class="clearfix"></div>
 
-    <?php echo $this->render('_form', [
+    <?php echo $this->render('_form_create', [
     'model' => $model,
     ]); ?>
 

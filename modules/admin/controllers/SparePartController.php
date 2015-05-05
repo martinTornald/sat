@@ -36,11 +36,11 @@ class SparePartController extends Controller
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionView($voyage_id)
+	public function actionView($id)
 	{
         Url::remember();
         return $this->render('view', [
-			'model' => $this->findModel($voyage_id),
+			'model' => $this->findModel($id),
 		]);
 	}
 
@@ -72,9 +72,9 @@ class SparePartController extends Controller
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionUpdate($voyage_id)
+	public function actionUpdate($id)
 	{
-		$model = $this->findModel($voyage_id);
+		$model = $this->findModel($id);
 
 		if ($model->load($_POST) && $model->save()) {
             return $this->redirect(Url::previous());
@@ -91,9 +91,9 @@ class SparePartController extends Controller
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionDelete($voyage_id)
+	public function actionDelete($id)
 	{
-		$this->findModel($voyage_id)->delete();
+		$this->findModel($id)->delete();
 		return $this->redirect(Url::previous());
 	}
 
@@ -104,9 +104,9 @@ class SparePartController extends Controller
 	 * @return SparePart the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
-	protected function findModel($voyage_id)
+	protected function findModel($id)
 	{
-		if (($model = SparePart::findOne($voyage_id)) !== null) {
+		if (($model = SparePart::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');

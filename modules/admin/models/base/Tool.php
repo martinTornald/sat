@@ -13,6 +13,7 @@ use Yii;
  * @property string $description
  *
  * @property DriverTool[] $driverTools
+ * @property Driver[] $drivers
  */
 class Tool extends \yii\db\ActiveRecord
 {
@@ -55,5 +56,13 @@ class Tool extends \yii\db\ActiveRecord
     public function getDriverTools()
     {
         return $this->hasMany(\app\modules\admin\models\DriverTool::className(), ['tool_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDrivers()
+    {
+        return $this->hasMany(\app\modules\admin\models\Driver::className(), ['id' => 'driver_id'])->viaTable('driver_tool', ['tool_id' => 'id']);
     }
 }

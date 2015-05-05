@@ -11,7 +11,7 @@ use app\modules\admin\models\SparePart;
  */
 class SparePartSearch extends Model
 {
-	public $voyage_id;
+	public $id;
 	public $plan;
 	public $name;
 	public $price;
@@ -19,7 +19,7 @@ class SparePartSearch extends Model
 	public function rules()
 	{
 		return [
-			[['voyage_id', 'plan'], 'integer'],
+			[['id', 'plan'], 'integer'],
 			[['name'], 'safe'],
 			[['price'], 'number'],
 		];
@@ -31,7 +31,7 @@ class SparePartSearch extends Model
 	public function attributeLabels()
 	{
 		return [
-			'voyage_id' => 'Перевозка',
+			'id' => 'ID',
 			'plan' => 'Запланированная деталь',
 			'name' => 'Наименование',
 			'price' => 'Цена',
@@ -50,7 +50,7 @@ class SparePartSearch extends Model
 		}
 
 		$query->andFilterWhere([
-            'voyage_id' => $this->voyage_id,
+            'id' => $this->id,
             'plan' => $this->plan,
             'price' => $this->price,
         ]);

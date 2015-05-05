@@ -58,22 +58,6 @@ $this->params['breadcrumbs'][] = 'View';
 
 
     
-<?php $this->beginBlock('DriverTools'); ?>
-<p class='pull-right'>
-  <?= \yii\helpers\Html::a(
-            '<span class="glyphicon glyphicon-list"></span> List All Driver Tools',
-            ['driver-tool/index'],
-            ['class'=>'btn text-muted btn-xs']
-        ) ?>
-  <?= \yii\helpers\Html::a(
-            '<span class="glyphicon glyphicon-plus"></span> New Driver Tool',
-            ['driver-tool/create', 'DriverTool'=>['tool_id'=>$model->id]],
-            ['class'=>'btn btn-success btn-xs']
-        ) ?>
-</p><div class='clearfix'></div>
-<?php $this->endBlock() ?>
-
-
     <?=
     \yii\bootstrap\Tabs::widget(
                  [
@@ -83,10 +67,6 @@ $this->params['breadcrumbs'][] = 'View';
     'label'   => '<span class="glyphicon glyphicon-asterisk"></span> Tool',
     'content' => $this->blocks['app\modules\admin\models\Tool'],
     'active'  => true,
-],[
-    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Driver Tools</small>',
-    'content' => $this->blocks['DriverTools'],
-    'active'  => false,
 ], ]
                  ]
     );

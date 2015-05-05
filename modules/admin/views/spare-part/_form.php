@@ -20,7 +20,6 @@ use yii\bootstrap\ActiveForm;
 
         <p>
             
-			<?= $form->field($model, 'voyage_id')->textInput() ?>
 			<?= $form->field($model, 'plan')->textInput() ?>
 			<?= $form->field($model, 'price')->textInput() ?>
 			<?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>

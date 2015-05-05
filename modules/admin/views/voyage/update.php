@@ -7,24 +7,31 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Voyage $model
  */
 
-$this->title = 'Voyage Update ' . $model->name . '';
-$this->params['breadcrumbs'][] = ['label' => 'Voyages', 'url' => ['index']];
+$this->title = 'Редактирование перевозки ' . $model->name . '';
+$this->params['breadcrumbs'][] = ['label' => 'Перевозки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Edit';
 ?>
+
+<!-- VOYAGE-UPDATE -->
 <div class="voyage-update">
 
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> Просмотр', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     </p>
 
-	<?php echo $this->render('_form', [
-		'model' => $model,
+    <?= $this->render('_nav', [
+        'id' => $model->id,
+        'type' => 'update',
+    ]) ?>
+
+    <?php echo $this->render('_form', [
+        'model' => $model,
         'customers'     => $customers,
         'cars'          => $cars,
         'trailers'      => $trailers,
         'drivers'       => $drivers,
         'statuses'      => $statuses,
-	]); ?>
+    ]); ?>
 
 </div>
+<!-- //VOYAGE-UPDATE -->

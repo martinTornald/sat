@@ -12,8 +12,6 @@ use yii\bootstrap\ActiveForm;
 <!-- COST-FORM -->
 <div class="cost-form">
 
-    <?= $this->render('/voyage/_nav', ['id' => $model->voyage_id]) ?>
-
     <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'enableClientValidation' => false]); ?>
 
     <!-- ACTIVE-FORM -->

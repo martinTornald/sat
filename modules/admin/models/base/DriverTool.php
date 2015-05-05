@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the base-model class for table "driver_tool".
  *
- * @property integer $id
  * @property integer $driver_id
  * @property integer $tool_id
  * @property string $date_of_issue
@@ -33,7 +32,7 @@ class DriverTool extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['driver_id', 'tool_id', 'date_of_issue'], 'required'],
+            [['driver_id', 'tool_id'], 'required'],
             [['driver_id', 'tool_id'], 'integer'],
             [['date_of_issue', 'date_delivery'], 'safe'],
             [['description'], 'string']
@@ -46,7 +45,6 @@ class DriverTool extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
             'driver_id' => Yii::t('app', 'Driver ID'),
             'tool_id' => Yii::t('app', 'Tool ID'),
             'date_of_issue' => Yii::t('app', 'Date Of Issue'),

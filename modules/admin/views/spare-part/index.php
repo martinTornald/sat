@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items'        => [
     [
-        'label' => '<i class="glyphicon glyphicon-arrow-left"> Voyage</i>',
+        'label' => '<i class="glyphicon glyphicon-arrow-right"> Voyage</i>',
         'url' => [
             'voyage/index',
         ],
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
         
-			'voyage_id',
+			'id',
 			'plan',
 			'name',
 			'price',

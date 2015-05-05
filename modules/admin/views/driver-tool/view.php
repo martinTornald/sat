@@ -10,15 +10,15 @@ use yii\widgets\Pjax;
 * @var app\modules\admin\models\DriverTool $model
 */
 
-$this->title = 'Driver Tool View ' . $model->id . '';
+$this->title = 'Driver Tool View ' . $model->driver_id . '';
 $this->params['breadcrumbs'][] = ['label' => 'Driver Tools', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->driver_id, 'url' => ['view', 'driver_id' => $model->driver_id, 'tool_id' => $model->tool_id]];
 $this->params['breadcrumbs'][] = 'View';
 ?>
 <div class="driver-tool-view">
 
     <p class='pull-left'>
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'id' => $model->id],
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'driver_id' => $model->driver_id, 'tool_id' => $model->tool_id],
         ['class' => 'btn btn-info']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Driver Tool', ['create'], ['class' => 'btn
         btn-success']) ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'View';
 
     
     <h3>
-        <?= $model->id ?>    </h3>
+        <?= $model->driver_id ?>    </h3>
 
 
     <?php $this->beginBlock('app\modules\admin\models\DriverTool'); ?>
@@ -38,8 +38,7 @@ $this->params['breadcrumbs'][] = 'View';
     <?php echo DetailView::widget([
     'model' => $model,
     'attributes' => [
-    			'id',
-			'driver_id',
+    			'driver_id',
 			'tool_id',
 			'date_of_issue',
 			'date_delivery',
@@ -49,7 +48,7 @@ $this->params['breadcrumbs'][] = 'View';
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'id' => $model->id],
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'driver_id' => $model->driver_id, 'tool_id' => $model->tool_id],
     [
     'class' => 'btn btn-danger',
     'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),

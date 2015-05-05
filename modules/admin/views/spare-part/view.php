@@ -12,13 +12,13 @@ use yii\widgets\Pjax;
 
 $this->title = 'Spare Part View ' . $model->name . '';
 $this->params['breadcrumbs'][] = ['label' => 'Spare Parts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'voyage_id' => $model->voyage_id]];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
 ?>
 <div class="spare-part-view">
 
     <p class='pull-left'>
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'voyage_id' => $model->voyage_id],
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'id' => $model->id],
         ['class' => 'btn btn-info']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Spare Part', ['create'], ['class' => 'btn
         btn-success']) ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = 'View';
     <?php echo DetailView::widget([
     'model' => $model,
     'attributes' => [
-    			'voyage_id',
+    			'id',
 			'plan',
 			'name',
 			'price',
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = 'View';
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'voyage_id' => $model->voyage_id],
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'id' => $model->id],
     [
     'class' => 'btn btn-danger',
     'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
@@ -58,6 +58,22 @@ $this->params['breadcrumbs'][] = 'View';
 
 
     
+<?php $this->beginBlock('Voyages'); ?>
+<p class='pull-right'>
+  <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-list"></span> List All Voyages',
+            ['voyage/index'],
+            ['class'=>'btn text-muted btn-xs']
+        ) ?>
+  <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> New Voyage',
+            ['voyage/create', 'Voyage'=>['spare_part_id'=>$model->id]],
+            ['class'=>'btn btn-success btn-xs']
+        ) ?>
+</p><div class='clearfix'></div>
+<?php $this->endBlock() ?>
+
+
     <?=
     \yii\bootstrap\Tabs::widget(
                  [
@@ -67,6 +83,10 @@ $this->params['breadcrumbs'][] = 'View';
     'label'   => '<span class="glyphicon glyphicon-asterisk"></span> SparePart',
     'content' => $this->blocks['app\modules\admin\models\SparePart'],
     'active'  => true,
+],[
+    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Voyages</small>',
+    'content' => $this->blocks['Voyages'],
+    'active'  => false,
 ], ]
                  ]
     );

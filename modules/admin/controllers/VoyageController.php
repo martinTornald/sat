@@ -2,15 +2,14 @@
 
 namespace app\modules\admin\controllers;
 
-use app\components\DateTimeStampBehavior;
 use app\modules\admin\models\Car;
 use app\modules\admin\models\Customer;
 use app\modules\admin\models\Driver;
+use app\modules\admin\models\SparePart;
 use app\modules\admin\models\Status;
 use app\modules\admin\models\Trailer;
 use app\modules\admin\models\Voyage;
 use app\modules\admin\models\VoyageSearch;
-use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -22,7 +21,6 @@ use yii\helpers\Url;
  */
 class VoyageController extends Controller
 {
-
 	/**
 	 * Lists all Voyage models.
 	 * @return mixed
@@ -95,7 +93,7 @@ class VoyageController extends Controller
             return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
-				'model'         => $model,
+				'model' => $model,
                 'customers'     => Customer::find()->all(),
                 'cars'          => Car::find()->all(),
                 'trailers'      => Trailer::find()->all(),

@@ -24,13 +24,14 @@ use Yii;
  * @property Income $income
  * @property Loading $loading
  * @property Rate $rate
- * @property SparePart $sparePart
  * @property Unloading $unloading
+ * @property Status $status
  * @property Car $car
  * @property Customer $customer
  * @property Driver $driver
- * @property Status $status
  * @property Trailer $trailer
+ * @property VoyageSparePath[] $voyageSparePaths
+ * @property SparePart[] $spareParts
  */
 class Voyage extends \yii\db\ActiveRecord
 {
@@ -125,17 +126,17 @@ class Voyage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSparePart()
+    public function getUnloading()
     {
-        return $this->hasOne(\app\modules\admin\models\SparePart::className(), ['voyage_id' => 'id']);
+        return $this->hasOne(\app\modules\admin\models\Unloading::className(), ['voyage_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUnloading()
+    public function getStatus()
     {
-        return $this->hasOne(\app\modules\admin\models\Unloading::className(), ['voyage_id' => 'id']);
+        return $this->hasOne(\app\modules\admin\models\Status::className(), ['id' => 'status_id']);
     }
 
     /**
@@ -165,16 +166,24 @@ class Voyage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStatus()
+    public function getTrailer()
     {
-        return $this->hasOne(\app\modules\admin\models\Status::className(), ['id' => 'status_id']);
+        return $this->hasOne(\app\modules\admin\models\Trailer::className(), ['id' => 'trailer_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTrailer()
+    public function getVoyageSparePaths()
     {
-        return $this->hasOne(\app\modules\admin\models\Trailer::className(), ['id' => 'trailer_id']);
+        return $this->hasMany(\app\modules\admin\models\VoyageSparePath::className(), ['voyage_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSpareParts()
+    {
+        return $this->hasMany(\app\modules\admin\models\SparePart::className(), ['id' => 'spare_part_id'])->viaTable('voyage_spare_path', ['voyage_id' => 'id']);
     }
 }

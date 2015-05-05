@@ -62,7 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
         
-			'id',
 			'driver_id',
 			'tool_id',
 			'date_of_issue',

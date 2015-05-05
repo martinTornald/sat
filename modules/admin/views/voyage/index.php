@@ -9,18 +9,18 @@ use yii\grid\GridView;
  * @var app\modules\admin\models\VoyageSearch $searchModel
  */
 
-$this->title = 'Voyages';
+$this->title = 'Перевозки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<!-- VOYAGE-INDEX -->
 <div class="voyage-index">
 
-    <?php //     echo $this->render('_search', ['model' =>$searchModel]);
-    ?>
+    <?php // echo $this->render('_search', ['model' =>$searchModel]); ?>
 
     <div class="clearfix">
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Voyage', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'id' => 'giiant-relations',
                     'encodeLabel' => false,
-                    'label' => '<span class="glyphicon glyphicon-paperclip"></span> Relations',
+                    'label' => '<span class="glyphicon glyphicon-paperclip"></span> Связи',
                     'dropdown' => [
                         'options' => [
                             'class' => 'dropdown-menu-right'
@@ -116,10 +116,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'trailer/index',
                                 ],
                             ],
+                            [
+                                'label' => '<i class="glyphicon glyphicon-random"> Voyage Spare Path</i>',
+                                'url' => [
+                                    'voyage-spare-path/index',
+                                ],
+                            ],
+                            [
+                                'label' => '<i class="glyphicon glyphicon-arrow-right"> Spare Part</i>',
+                                'url' => [
+                                    'spare-part/index',
+                                ],
+                            ],
                         ]],
                 ]
             );
-            ?>        </div>
+            ?>
+        </div>
     </div>
 
     <?php echo GridView::widget([
@@ -165,3 +178,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+<!-- //VOYAGE-INDEX -->

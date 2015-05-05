@@ -41,7 +41,7 @@ class Income extends \yii\db\ActiveRecord
     {
         return [
             'voyage_id' => Yii::t('app', 'Voyage ID'),
-            'fact' => Yii::t('app', 'Fact'),
+            'fact' => Yii::t('app', 'Фактический'),
         ];
     }
 

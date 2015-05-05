@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items'        => [
     [
-        'label' => '<i class="glyphicon glyphicon-arrow-right"> Driver Tool</i>',
+        'label' => '<i class="glyphicon glyphicon-random"> Driver Tool</i>',
         'url' => [
             'driver-tool/index',
         ],

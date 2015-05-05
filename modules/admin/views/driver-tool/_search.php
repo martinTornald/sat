@@ -17,8 +17,6 @@ use yii\widgets\ActiveForm;
 		'method' => 'get',
 	]); ?>
 
-		<?= $form->field($model, 'id') ?>
-
 		<?= $form->field($model, 'driver_id') ?>
 
 		<?= $form->field($model, 'tool_id') ?>
@@ -27,7 +25,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'date_delivery') ?>
 
-		<?php // echo $form->field($model, 'description') ?>
+		<?= $form->field($model, 'description') ?>
 
 		<div class="form-group">
 			<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

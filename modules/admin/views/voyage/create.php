@@ -7,9 +7,9 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Voyage $model
  */
 
-$this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Voyages', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Создание перевозки';
+$this->params['breadcrumbs'][] = ['label' => 'Перевозки', 'url' => ['index']];
+
 ?>
 <div class="voyage-create">
 
@@ -18,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div class="clearfix"></div>
+
+    <?= $this->render('_nav_create', [
+        'id' => $model->id
+    ]) ?>
 
     <?php echo $this->render('_form', [
         'model'         => $model,

@@ -6,67 +6,59 @@ use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 
 /**
-* @var yii\web\View $this
-* @var app\modules\admin\models\Cost $model
-*/
+ * @var yii\web\View $this
+ * @var app\modules\admin\models\Cost $model
+ */
 
-$this->title = 'Cost View ' . $model->voyage_id . '';
+$this->title = 'Стоимость перевозки ' . $model->voyage->name . '';
 $this->params['breadcrumbs'][] = ['label' => 'Costs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->voyage_id, 'url' => ['view', 'voyage_id' => $model->voyage_id]];
-$this->params['breadcrumbs'][] = 'View';
+$this->params['breadcrumbs'][] = ['label' => (string)$model->voyage->name, 'url' => ['view', 'voyage_id' => $model->voyage_id]];
 ?>
+
+<!-- COST-VIEW -->
 <div class="cost-view">
 
     <p class='pull-left'>
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'voyage_id' => $model->voyage_id],
-        ['class' => 'btn btn-info']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Cost', ['create'], ['class' => 'btn
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Редактировать', ['update', 'voyage_id' => $model->voyage_id],
+            ['class' => 'btn btn-info']) ?>
+        <!--
+        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить', ['create'], ['class' => 'btn
         btn-success']) ?>
+        -->
     </p>
 
-        <p class='pull-right'>
-        <?= Html::a('<span class="glyphicon glyphicon-list"></span> List', ['index'], ['class'=>'btn btn-default']) ?>
-    </p><div class='clearfix'></div> 
+    <p class='pull-right'>
+        <?= Html::a('<span class="glyphicon glyphicon-list"></span> Полный список', ['index'], ['class' => 'btn btn-default']) ?>
+    </p>
 
-    
-    <h3>
-        <?= $model->voyage_id ?>    </h3>
+    <div class='clearfix'></div>
 
-
-    <?php $this->beginBlock('app\modules\admin\models\Cost'); ?>
+    <?= $this->render('/voyage/_nav', [
+        'id' => $model->voyage_id,
+        'type' => 'view',
+    ]) ?>
 
     <?php echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-    			'voyage_id',
-			'plan',
-			'fact',
-    ],
+        'model' => $model,
+        'attributes' => [
+            [
+                'label' => 'Перевозка',
+                'format'=>'raw',
+                'value' => Html::a($model->voyage->name, ['/admin/voyage/view', 'id' => $model->voyage->id]),
+            ],
+            'plan',
+            'fact',
+        ],
     ]); ?>
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'voyage_id' => $model->voyage_id],
-    [
-    'class' => 'btn btn-danger',
-    'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
-    'data-method' => 'post',
-    ]); ?>
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Удалить', ['delete', 'voyage_id' => $model->voyage_id],
+        [
+            'class' => 'btn btn-danger',
+            'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
+            'data-method' => 'post',
+        ]); ?>
 
-    <?php $this->endBlock(); ?>
-
-
-    
-    <?=
-    \yii\bootstrap\Tabs::widget(
-                 [
-                     'id' => 'relation-tabs',
-                     'encodeLabels' => false,
-                     'items' => [ [
-    'label'   => '<span class="glyphicon glyphicon-asterisk"></span> Cost',
-    'content' => $this->blocks['app\modules\admin\models\Cost'],
-    'active'  => true,
-], ]
-                 ]
-    );
-    ?></div>
+</div>
+<!-- //COST-VIEW -->

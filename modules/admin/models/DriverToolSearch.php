@@ -11,7 +11,6 @@ use app\modules\admin\models\DriverTool;
  */
 class DriverToolSearch extends Model
 {
-	public $id;
 	public $driver_id;
 	public $tool_id;
 	public $date_of_issue;
@@ -21,7 +20,7 @@ class DriverToolSearch extends Model
 	public function rules()
 	{
 		return [
-			[['id', 'driver_id', 'tool_id'], 'integer'],
+			[['driver_id', 'tool_id'], 'integer'],
 			[['date_of_issue', 'date_delivery', 'description'], 'safe'],
 		];
 	}
@@ -32,7 +31,6 @@ class DriverToolSearch extends Model
 	public function attributeLabels()
 	{
 		return [
-			'id' => 'ID',
 			'driver_id' => 'Driver ID',
 			'tool_id' => 'Tool ID',
 			'date_of_issue' => 'Date Of Issue',
@@ -53,7 +51,6 @@ class DriverToolSearch extends Model
 		}
 
 		$query->andFilterWhere([
-            'id' => $this->id,
             'driver_id' => $this->driver_id,
             'tool_id' => $this->tool_id,
             'date_of_issue' => $this->date_of_issue,

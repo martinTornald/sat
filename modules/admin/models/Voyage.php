@@ -71,13 +71,6 @@ class Voyage extends \app\modules\admin\models\base\Voyage
             ]);
             $rate->save(false);
 
-            // Создание записи о оплате перевозки
-            $sparePart = \Yii::createObject([
-                'class'          => SparePart::className(),
-                'voyage_id'      => $this->id,
-            ]);
-            $sparePart->save(false);
-
             // Создание записи о разгрузке перевозки
             $unloading = \Yii::createObject([
                 'class'          => Unloading::className(),

@@ -19,14 +19,14 @@ class VoyageSearch extends Model
 	public $status_id;
 	public $name;
 	public $description;
-	public $updated;
+	public $updated_at;
 	public $created_at;
 
 	public function rules()
 	{
 		return [
 			[['id', 'customer_id', 'car_id', 'trailer_id', 'driver_id', 'status_id'], 'integer'],
-			[['name', 'description', 'updated', 'created_at'], 'safe'],
+			[['name', 'description', 'updated_at', 'created_at'], 'safe'],
 		];
 	}
 
@@ -44,7 +44,7 @@ class VoyageSearch extends Model
 			'status_id' => 'Статус',
 			'name' => 'Название перевозки',
 			'description' => 'Описание перевозки',
-			'updated' => 'Дата обновления',
+			'updated_at' => 'Дата обновления',
 			'created_at' => 'Дата создания',
 		];
 	}
@@ -67,7 +67,7 @@ class VoyageSearch extends Model
             'trailer_id' => $this->trailer_id,
             'driver_id' => $this->driver_id,
             'status_id' => $this->status_id,
-            'updated' => $this->updated,
+            'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
         ]);
 
