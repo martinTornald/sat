@@ -11,7 +11,7 @@ use app\modules\admin\models\Insurance;
  */
 class InsuranceSearch extends Model
 {
-	public $id;
+	public $car_id;
 	public $name;
 	public $createdAt;
 	public $term;
@@ -20,7 +20,7 @@ class InsuranceSearch extends Model
 	public function rules()
 	{
 		return [
-			[['id'], 'integer'],
+			[['car_id'], 'integer'],
 			[['name', 'createdAt', 'term', 'description'], 'safe'],
 		];
 	}
@@ -31,7 +31,7 @@ class InsuranceSearch extends Model
 	public function attributeLabels()
 	{
 		return [
-			'id' => 'ID',
+			'car_id' => 'Car ID',
 			'name' => 'Наименование',
 			'createdAt' => 'Дата выдачи',
 			'term' => 'Срок действия',
@@ -51,7 +51,7 @@ class InsuranceSearch extends Model
 		}
 
 		$query->andFilterWhere([
-            'id' => $this->id,
+            'car_id' => $this->car_id,
             'createdAt' => $this->createdAt,
             'term' => $this->term,
         ]);

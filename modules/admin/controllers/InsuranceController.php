@@ -36,11 +36,11 @@ class InsuranceController extends Controller
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionView($id)
+	public function actionView($car_id)
 	{
         Url::remember();
         return $this->render('view', [
-			'model' => $this->findModel($id),
+			'model' => $this->findModel($car_id),
 		]);
 	}
 
@@ -72,9 +72,9 @@ class InsuranceController extends Controller
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($car_id)
 	{
-		$model = $this->findModel($id);
+		$model = $this->findModel($car_id);
 
 		if ($model->load($_POST) && $model->save()) {
             return $this->redirect(Url::previous());
@@ -91,9 +91,9 @@ class InsuranceController extends Controller
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionDelete($id)
+	public function actionDelete($car_id)
 	{
-		$this->findModel($id)->delete();
+		$this->findModel($car_id)->delete();
 		return $this->redirect(Url::previous());
 	}
 
@@ -104,9 +104,9 @@ class InsuranceController extends Controller
 	 * @return Insurance the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
-	protected function findModel($id)
+	protected function findModel($car_id)
 	{
-		if (($model = Insurance::findOne($id)) !== null) {
+		if (($model = Insurance::findOne($car_id)) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');

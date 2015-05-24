@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
+use yii\data\ArrayDataProvider;
 
 /**
  * @var yii\web\View $this
@@ -81,6 +82,40 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['vi
 
 
     <?php $this->beginBlock('Voyages'); ?>
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->voyages,
+    ]);
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'controller' => 'voyage',
+                'buttons'=>[
+                    'view'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/view','id'=>$model->id]);
+
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+
+                    },
+                    'edit'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    },
+                    'delete'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    }
+
+                ],
+            ],
+        ],
+    ]); ?>
+
     <p class='pull-right'>
         <?= \yii\helpers\Html::a(
             '<span class="glyphicon glyphicon-list"></span> List All Voyages',

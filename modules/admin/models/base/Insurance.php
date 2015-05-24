@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the base-model class for table "insurance".
  *
- * @property integer $id
+ * @property integer $car_id
  * @property string $name
  * @property string $createdAt
  * @property string $term
  * @property string $description
  *
- * @property Car[] $cars
+ * @property Car $car
  */
 class Insurance extends \yii\db\ActiveRecord
 {
@@ -31,6 +31,8 @@ class Insurance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['car_id'], 'required'],
+            [['car_id'], 'integer'],
             [['createdAt', 'term'], 'safe'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255]
@@ -43,7 +45,7 @@ class Insurance extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'car_id' => Yii::t('app', 'Машина'),
             'name' => Yii::t('app', 'Наименование'),
             'createdAt' => Yii::t('app', 'Дата выдачи'),
             'term' => Yii::t('app', 'Срок действия'),
@@ -54,8 +56,10 @@ class Insurance extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCars()
+    public function getCar()
     {
-        return $this->hasMany(\app\modules\admin\models\Car::className(), ['insurance_id' => 'id']);
+        return $this->hasOne(\app\modules\admin\models\Car::className(), ['id' => 'car_id']);
     }
+
+
 }

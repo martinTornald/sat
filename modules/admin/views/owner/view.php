@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
+use yii\data\ArrayDataProvider;
 
 /**
  * @var yii\web\View $this
@@ -18,14 +19,14 @@ $this->params['breadcrumbs'][] = 'View';
 <div class="owner-view">
 
     <p class='pull-left'>
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Edit', ['update', 'id' => $model->id],
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Редактировать', ['update', 'id' => $model->id],
             ['class' => 'btn btn-info']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> New Owner', ['create'], ['class' => 'btn
+        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить', ['create'], ['class' => 'btn
         btn-success']) ?>
     </p>
 
     <p class='pull-right'>
-        <?= Html::a('<span class="glyphicon glyphicon-list"></span> List', ['index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-list"></span> Полный список', ['index'], ['class' => 'btn btn-default']) ?>
     </p>
 
     <div class='clearfix'></div>
@@ -51,7 +52,7 @@ $this->params['breadcrumbs'][] = 'View';
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'id' => $model->id],
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Удалить', ['delete', 'id' => $model->id],
         [
             'class' => 'btn btn-danger',
             'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
@@ -72,18 +73,27 @@ $this->params['breadcrumbs'][] = 'View';
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'number',
-            'make_model',
-            'color',
-            'year',
-            'reg_number',
-            'reg_certificate',
-            'mileage',
-            'photo',
-            'cost',
+            'fullName',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'controller' => 'car'
+                'controller' => 'car',
+                'buttons'=>[
+                    'view'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/car/view','id'=>$model->id]);
+
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+
+                    },
+                    'edit'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/car/edit','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    },
+                    'delete'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/car/delete','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    }
+
+                ],
             ],
         ],
     ]); ?>
@@ -105,6 +115,39 @@ $this->params['breadcrumbs'][] = 'View';
 
 
     <?php $this->beginBlock('Trailers'); ?>
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->trailers,
+    ]);
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'fullName',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'controller' => 'car',
+                'buttons'=>[
+                    'view'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/trailer/view','id'=>$model->id]);
+
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+
+                    },
+                    'edit'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/trailer/edit','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    },
+                    'delete'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/trailer/delete','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    }
+
+                ],
+            ],
+        ],
+    ]); ?>
     <p class='pull-right'>
         <?= \yii\helpers\Html::a(
             '<span class="glyphicon glyphicon-list"></span> List All Trailers',
@@ -128,15 +171,15 @@ $this->params['breadcrumbs'][] = 'View';
             'id' => 'relation-tabs',
             'encodeLabels' => false,
             'items' => [[
-                'label' => '<span class="glyphicon glyphicon-asterisk"></span> Owner',
+                'label' => '<span class="glyphicon glyphicon-asterisk"></span> Владельцы',
                 'content' => $this->blocks['app\modules\admin\models\Owner'],
                 'active' => true,
             ], [
-                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Cars</small>',
+                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Машины</small>',
                 'content' => $this->blocks['Cars'],
                 'active' => false,
             ], [
-                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Trailers</small>',
+                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Прицепы</small>',
                 'content' => $this->blocks['Trailers'],
                 'active' => false,
             ],]

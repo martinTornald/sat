@@ -72,7 +72,24 @@ $this->params['breadcrumbs'][] = 'View';
             'name',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'controller' => 'voyage'
+                'controller' => 'voyage',
+                'buttons'=>[
+                    'view'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/view','id'=>$model->id]);
+
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+
+                    },
+                    'edit'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    },
+                    'delete'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    }
+
+                ],
             ],
         ],
     ]); ?>

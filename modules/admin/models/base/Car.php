@@ -40,7 +40,7 @@ class Car extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['owner_id', 'insurance_id', 'mileage'], 'integer'],
+            [['owner_id', 'mileage'], 'integer'],
             [['year'], 'safe'],
             [['cost'], 'number'],
             [['make_model', 'color', 'reg_number', 'reg_certificate', 'photo'], 'string', 'max' => 255],
@@ -56,7 +56,6 @@ class Car extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'owner_id' => Yii::t('app', 'Владельц'),
-            'insurance_id' => Yii::t('app', 'Страховка'),
             'make_model' => Yii::t('app', 'Модель'),
             'number' => Yii::t('app', 'Номер'),
             'color' => Yii::t('app', 'Цвет'),
@@ -82,7 +81,7 @@ class Car extends \yii\db\ActiveRecord
      */
     public function getInsurance()
     {
-        return $this->hasOne(\app\modules\admin\models\Insurance::className(), ['id' => 'insurance_id']);
+        return $this->hasOne(\app\modules\admin\models\Insurance::className(), ['car_id' => 'id']);
     }
 
     /**

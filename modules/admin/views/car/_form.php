@@ -24,9 +24,6 @@ use yii\helpers\ArrayHelper;
             <?= $form->field($model, 'owner_id')->dropDownList(
                 ArrayHelper::map($owner, 'id', 'fullName')
             ) ?>
-            <?= $form->field($model, 'insurance_id')->dropDownList(
-                ArrayHelper::map($insurance, 'id', 'name')
-            ) ?>
             <?= $form->field($model, 'mileage')->textInput() ?>
             <?= $form->field($model, 'year')->textInput(['maxlength' => 4]) ?>
             <?= $form->field($model, 'cost')->textInput() ?>

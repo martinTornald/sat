@@ -21,10 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="clearfix"></div>
 
+    <?= $this->render('_nav_create', [
+        'id' => $model->id
+    ]) ?>
+
     <?php echo $this->render('_form', [
         'model' => $model,
-        'owner' => $owner,
-        'insurance' => $insurance,
+        'owner' => $owner
     ]); ?>
 
 </div>

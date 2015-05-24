@@ -32,6 +32,11 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
 
     <div class='clearfix'></div>
 
+    <?= $this->render('_nav', [
+        'id' => $model->id,
+        'type' => 'view',
+    ]) ?>
+
     <?php $this->beginBlock('app\modules\admin\models\Car'); ?>
 
     <?php echo DetailView::widget([
@@ -43,11 +48,7 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
                 'format'=>'raw',
                 'value' => Html::a($model->owner->fullName, ['/admin/owner/view', 'id' => $model->owner->id]),
             ],
-            [
-                'label' => 'Страховка',
-                'format'=>'raw',
-                'value' => Html::a($model->insurance->name, ['/admin/insurance/view', 'id' => $model->insurance->id]),
-            ],
+
             'make_model',
             'number',
             'color',
@@ -77,15 +78,38 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     $dataProvider = new ArrayDataProvider([
         'allModels' => $model->voyages,
     ]);
+
     ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
             [
-                'class' => 'yii\grid\ActionColumn',
-                'controller' => 'voyage'
+
+                'class' => \yii\grid\ActionColumn::className(),
+                'controller' => 'voyage',
+                'urlCreator'=>function($action, $model, $key, $index){
+                    return [$action,'id'=>$model->id,];
+                },
+                'buttons'=>[
+                    'view'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/view','id'=>$model->id]);
+
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+
+                    },
+                    'edit'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    },
+                    'delete'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    }
+
+                ],
             ],
         ],
     ]); ?>

@@ -69,10 +69,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'owner_id',
                 'value' => 'owner.fullName'
             ],
-            [
-                'attribute' => 'insurance_id',
-                'value' => 'insurance.name'
-            ],
             'make_model',
             'number',
             'color',

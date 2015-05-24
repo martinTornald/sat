@@ -9,8 +9,13 @@ use Yii;
  */
 class Trailer extends \app\modules\admin\models\base\Trailer
 {
+    /**
+     * Возвращает подробное имя прицепа
+     *
+     * @return string
+     */
     public function getFullName()
     {
-        return $this->make_model . ' (' . $this->reg_number . ', ' . $this->type . ')';
+        return $this->make_model . ' (' . $this->reg_number . ')';
     }
 }

@@ -9,14 +9,19 @@ use yii\helpers\Html;
 
 $this->title = 'Insurance Update ' . $model->name . '';
 $this->params['breadcrumbs'][] = ['label' => 'Insurances', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'car_id' => $model->car_id]];
 $this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="insurance-update">
 
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 'car_id' => $model->car_id], ['class' => 'btn btn-info']) ?>
     </p>
+
+    <?= $this->render('/car/_nav', [
+        'id' => $model->car_id,
+        'type' => 'update',
+    ]) ?>
 
 	<?php echo $this->render('_form', [
 		'model' => $model,

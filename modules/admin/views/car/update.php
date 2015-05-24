@@ -7,7 +7,7 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Car $model
  */
 
-$this->title = 'Обновление машины ' . $model->id . '';
+$this->title = 'Обновление машины ' . $model->fullName  . '';
 $this->params['breadcrumbs'][] = ['label' => 'Машины', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактирование';
@@ -22,8 +22,7 @@ $this->params['breadcrumbs'][] = 'Редактирование';
 
 	<?php echo $this->render('_form', [
 		'model' => $model,
-        'owner' => $owner,
-        'insurance' => $insurance,
+        'owner' => $owner
 	]); ?>
 
 </div>

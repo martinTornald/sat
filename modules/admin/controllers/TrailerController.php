@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\Owner;
 use app\modules\admin\models\Trailer;
 use app\modules\admin\models\TrailerSearch;
 use yii\web\Controller;
@@ -41,6 +42,7 @@ class TrailerController extends Controller
         Url::remember();
         return $this->render('view', [
 			'model' => $this->findModel($id),
+            'owner' => Owner::find()->all()
 		]);
 	}
 
@@ -81,6 +83,7 @@ class TrailerController extends Controller
 		} else {
 			return $this->render('update', [
 				'model' => $model,
+                'owner' => Owner::find()->all()
 			]);
 		}
 	}
