@@ -64,6 +64,7 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['vi
 
 
     <?php $this->beginBlock('DriverTools'); ?>
+
     <p class='pull-right'>
         <?= \yii\helpers\Html::a(
             '<span class="glyphicon glyphicon-list"></span> List All Driver Tools',

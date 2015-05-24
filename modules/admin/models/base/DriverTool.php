@@ -45,11 +45,11 @@ class DriverTool extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'driver_id' => Yii::t('app', 'Driver ID'),
-            'tool_id' => Yii::t('app', 'Tool ID'),
-            'date_of_issue' => Yii::t('app', 'Date Of Issue'),
-            'date_delivery' => Yii::t('app', 'Date Delivery'),
-            'description' => Yii::t('app', 'Description'),
+            'driver_id' => Yii::t('app', 'Водители'),
+            'tool_id' => Yii::t('app', 'Инструменты'),
+            'date_of_issue' => Yii::t('app', 'Дата выдачи'),
+            'date_delivery' => Yii::t('app', 'Дата сдачи'),
+            'description' => Yii::t('app', 'Описание'),
         ];
     }
 

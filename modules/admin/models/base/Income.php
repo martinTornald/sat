@@ -40,7 +40,7 @@ class Income extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'voyage_id' => Yii::t('app', 'Voyage ID'),
+            'voyage_id' => Yii::t('app', 'Перевозка'),
             'fact' => Yii::t('app', 'Фактический'),
         ];
     }

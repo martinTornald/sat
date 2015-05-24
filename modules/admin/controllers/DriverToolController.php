@@ -2,8 +2,10 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\Driver;
 use app\modules\admin\models\DriverTool;
 use app\modules\admin\models\DriverToolSearch;
+use app\modules\admin\models\Tool;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -64,7 +66,11 @@ class DriverToolController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
-        return $this->render('create', ['model' => $model,]);
+        return $this->render('create', [
+            'model' => $model,
+            'drivers' => Driver::find()->all(),
+            'tools' => Tool::find()->all(),
+        ]);
 	}
 
 	/**
@@ -83,6 +89,8 @@ class DriverToolController extends Controller
 		} else {
 			return $this->render('update', [
 				'model' => $model,
+                'drivers' => Driver::find()->all(),
+                'tools' => Tool::find()->all(),
 			]);
 		}
 	}
