@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\modules\admin\models\Car;
 use common\models\LoginForm;
 use app\models\ContactForm;
 use app\models\PasswordResetRequestForm;
@@ -53,7 +54,9 @@ class SiteController extends Controller
             ],
             'description'
         );
-        return $this->render('index');
+        return $this->render('index',[
+
+        ]);
     }
 
     /**

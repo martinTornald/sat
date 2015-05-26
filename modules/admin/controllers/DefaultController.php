@@ -1,6 +1,12 @@
 <?php
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\Car;
+use app\modules\admin\models\Customer;
+use app\modules\admin\models\Driver;
+use app\modules\admin\models\Loading;
+use app\modules\admin\models\Unloading;
+use app\modules\admin\models\Voyage;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -57,7 +63,14 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            'cars' => Car::find()->orderBy('id DESC')->all(),
+            'voyages' => Voyage::find()->orderBy('id DESC')->all(),
+            'customers' => Customer::find()->all(),
+            'drivers' => Driver::find()->all(),
+            'loadings' => Loading::find()->orderBy('voyage_id DESC')->all(),
+            'unloadings' => Unloading::find()->orderBy('voyage_id DESC')->all(),
+        ]);
     }
 
     /**
