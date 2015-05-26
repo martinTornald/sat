@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Driver Tools', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => (string)$model->driver_id, 'url' => ['view', 'driver_id' => $model->driver_id, 'tool_id' => $model->tool_id]];
 $this->params['breadcrumbs'][] = 'View';
 ?>
+
+<!-- DRIVER-TOOL-VIEW -->
 <div class="driver-tool-view">
 
     <p class='pull-left'>
@@ -37,7 +39,7 @@ $this->params['breadcrumbs'][] = 'View';
         'attributes' => [
             [
                 'label' => 'Водитель',
-                'format'=>'raw',
+                'format' => 'raw',
                 'value' => Html::a($model->driver->fullName, ['/admin/driver/view', 'id' => $model->driver->id]),
             ],
             'tool_id',
@@ -49,7 +51,7 @@ $this->params['breadcrumbs'][] = 'View';
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', ['delete', 'driver_id' => $model->driver_id, 'tool_id' => $model->tool_id],
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> Удалить', ['delete', 'driver_id' => $model->driver_id, 'tool_id' => $model->tool_id],
         [
             'class' => 'btn btn-danger',
             'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
@@ -66,10 +68,12 @@ $this->params['breadcrumbs'][] = 'View';
             'id' => 'relation-tabs',
             'encodeLabels' => false,
             'items' => [[
-                'label' => '<span class="glyphicon glyphicon-asterisk"></span> DriverTool',
+                'label' => '<span class="glyphicon glyphicon-asterisk"></span> Инструменты водителей',
                 'content' => $this->blocks['app\modules\admin\models\DriverTool'],
                 'active' => true,
             ],]
         ]
     );
-    ?></div>
+    ?>
+</div>
+<!-- //DRIVER-TOOL-VIEW -->

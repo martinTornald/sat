@@ -64,7 +64,39 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['vi
 
 
     <?php $this->beginBlock('DriverTools'); ?>
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->tools,
+    ]);
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'controller' => 'tool',
+                'buttons'=>[
+                    'view'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/tool/view','id'=>$model->id]);
 
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+
+                    },
+                    'edit'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/tool/edit','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    },
+                    'delete'=>function ($url, $model) {
+                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/tool/delete','id'=>$model->id]);
+                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    }
+
+                ],
+            ],
+        ],
+    ]); ?>
     <p class='pull-right'>
         <?= \yii\helpers\Html::a(
             '<span class="glyphicon glyphicon-list"></span> List All Driver Tools',

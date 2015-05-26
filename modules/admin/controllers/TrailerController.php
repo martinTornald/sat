@@ -42,7 +42,8 @@ class TrailerController extends Controller
         Url::remember();
         return $this->render('view', [
 			'model' => $this->findModel($id),
-            'owner' => Owner::find()->all()
+            'owner' => Owner::find()->all(),
+            'years' => $this->getYears(),
 		]);
 	}
 
@@ -83,7 +84,8 @@ class TrailerController extends Controller
 		} else {
 			return $this->render('update', [
 				'model' => $model,
-                'owner' => Owner::find()->all()
+                'owner' => Owner::find()->all(),
+                'years' => $this->getYears(),
 			]);
 		}
 	}
@@ -115,4 +117,22 @@ class TrailerController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+    /**
+     * Возвращает список годов
+     *
+     * @return array
+     */
+    public function getYears() {
+        $years = array();
+        $currentYear = date('Y');
+        for($year = $currentYear;  $year > 1949;  $year--) {
+            array_push($years, array(
+                    'id' => $year,
+                    'year'=> $year,
+                )
+            );
+        }
+        return $years;
+    }
 }

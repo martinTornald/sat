@@ -22,7 +22,8 @@ $this->params['breadcrumbs'][] = 'Редактирование';
 
 	<?php echo $this->render('_form', [
 		'model' => $model,
-        'owner' => $owner
+        'owner' => $owner,
+        'years' => $years,
 	]); ?>
 
 </div>

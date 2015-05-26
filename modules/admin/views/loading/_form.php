@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /**
  * @var yii\web\View $this
@@ -32,8 +33,28 @@ use yii\bootstrap\ActiveForm;
 
             </div>
             <!-- //LOADING:VOYAGE -->
-            <?= $form->field($model, 'plan')->textInput() ?>
-            <?= $form->field($model, 'fact')->textInput() ?>
+            <?= $form->field($model, 'plan')->widget(
+                DatePicker::className(), [
+                'language' => 'ru',
+                'inline' => false,
+                // modify template for custom rendering
+                //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]);?>
+            <?= $form->field($model, 'fact')->widget(
+                DatePicker::className(), [
+                'language' => 'ru',
+                'inline' => false,
+                // modify template for custom rendering
+                //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]);?>
             <?= $form->field($model, 'place')->textInput(['maxlength' => 255]) ?>
         </p>
 

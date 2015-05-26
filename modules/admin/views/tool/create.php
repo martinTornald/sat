@@ -7,8 +7,8 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Tool $model
  */
 
-$this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Tools', 'url' => ['index']];
+$this->title = 'Создать инструент';
+$this->params['breadcrumbs'][] = ['label' => 'Инструенты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tool-create">

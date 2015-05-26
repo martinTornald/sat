@@ -65,9 +65,12 @@ class CarController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
+
+
         return $this->render('create', [
             'model' => $model,
-            'owner' => Owner::find()->all()
+            'owner' => Owner::find()->all(),
+            'years' => $this->getYears(),
         ]);
 	}
 
@@ -86,7 +89,8 @@ class CarController extends Controller
 		} else {
 			return $this->render('update', [
 				'model' => $model,
-                'owner' => Owner::find()->all()
+                'owner' => Owner::find()->all(),
+                'years' => $this->getYears(),
 			]);
 		}
 	}
@@ -118,4 +122,22 @@ class CarController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+    /**
+     * Возвращает список годов
+     *
+     * @return array
+     */
+    public function getYears() {
+        $years = array();
+        $currentYear = date('Y');
+        for($year = $currentYear;  $year > 1949;  $year--) {
+            array_push($years, array(
+                'id' => $year,
+                'year'=> $year,
+                )
+            );
+        }
+        return $years;
+    }
 }
