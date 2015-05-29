@@ -9,7 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property integer $owner_id
- * @property integer $insurance_id
  * @property string $make_model
  * @property string $number
  * @property string $color
@@ -21,6 +20,7 @@ use Yii;
  * @property double $cost
  *
  * @property Owner $owner
+ * @property CarInaction[] $carInactions
  * @property Insurance $insurance
  * @property Voyage[] $voyages
  */
@@ -74,6 +74,14 @@ class Car extends \yii\db\ActiveRecord
     public function getOwner()
     {
         return $this->hasOne(\app\modules\admin\models\Owner::className(), ['id' => 'owner_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarInactions()
+    {
+        return $this->hasMany(\app\modules\admin\models\CarInaction::className(), ['car_id' => 'id']);
     }
 
     /**

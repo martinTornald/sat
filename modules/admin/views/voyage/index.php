@@ -135,10 +135,15 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <?php echo GridView::widget([
+    <?php
+    $dataProvider->sort = ['defaultOrder' => ['id' => 'DESC']];
+
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+
         'columns' => [
+
             'id',
             [
                 'attribute' => 'customer_id',

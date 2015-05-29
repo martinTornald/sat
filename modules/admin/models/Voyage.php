@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use app\components\DateTimeStampBehavior;
+
 use Yii;
 use yii\db\BaseActiveRecord;
 
@@ -77,7 +78,20 @@ class Voyage extends \app\modules\admin\models\base\Voyage
                 'voyage_id'      => $this->id,
             ]);
             $unloading->save(false);
+
+            // Создание информации о простое
+            $voyageInactionLast = CarInaction::find()->where(['car_id' => $this->car_id ])->orderBy('id DESC')->one();
+
+            $carInaction = \Yii::createObject([
+                'class'          => CarInaction::className(),
+                'voyage_prev'      => $voyageInactionLast->voyageNext->id,
+                'voyage_next'      => $this->id,
+            ]);
+            $carInaction->save(false);
+
         }
         parent::afterSave($insert, $changedAttributes);
     }
+
+
 }
