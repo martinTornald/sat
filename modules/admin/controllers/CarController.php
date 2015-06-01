@@ -25,6 +25,7 @@ class CarController extends Controller
      */
     public function actionInaction()
     {
+        //$this->setInaction();
         return $this->render('inaction', [
             'cars' => Car::find()->all(),
         ]);
@@ -178,24 +179,26 @@ class CarController extends Controller
                 $skey = 0;
             }
             while (count($voyages) > 0) {
-
+                $skey = 0;
                 foreach ($voyages as $key => $voyage) {
-                    if (strtotime($voyage->loading->fact) <  strtotime($voyages[$skey]->loading->fact)) {
+                    if (strtotime($voyage->loading->fact) <= strtotime($voyages[$skey]->loading->fact)) {
                         $skey = $key;
                     }
                 }
 
                 $voyage_next = $voyages[$skey];
                 array_splice ($voyages,$skey,1);
-                $skey = 0;
+                if(strtotime($voyage_prev->unloading->fact) < strtotime($voyage_next->loading->fact)) {
+                    $carInaction = new CarInaction();
+                    $carInaction->car_id = $car->id;
+                    $carInaction->voyage_prev = $voyage_prev->id;
+                    $carInaction->voyage_next = $voyage_next->id;
+                    $voyage_prev = $voyage_next;
 
-                $carInaction = new CarInaction();
-                $carInaction->car_id = $car->id;
-                $carInaction->voyage_prev = $voyage_prev->id;
-                $carInaction->voyage_next = $voyage_next->id;
-                $voyage_prev = $voyage_next;
+                    $carInaction->save(false);
+                }
 
-                $carInaction->save(false);
+
 
             }
         }

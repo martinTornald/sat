@@ -55,6 +55,7 @@ class Module extends \yii\base\Module
 
         $autoMenuItems = [
             'car'           => ['label' => '<i class="fa fa-car"></i> <span>Машины</span>',                     'url' => ['/admin/car']],
+            'carInaction'   => ['label' => '<i class="fa fa-car"></i> <span>Простои машин</span>',              'url' => ['/admin/car/inaction']],
             'cost'          => ['label' => '<i class="fa fa-money"></i> <span>Стоимость перевозок</span>',      'url' => ['/admin/cost']],
             'cost_driver'   => ['label' => '<i class="fa fa-credit-card"></i> <span>Оплата водителей</span>',   'url' => ['/admin/cost-driver']],
             'customer'      => ['label' => '<i class="fa fa-user"></i> <span>Клиенты</span>',                   'url' => ['/admin/customer']],

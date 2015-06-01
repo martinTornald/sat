@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
             'id',
             [
                 'label' => 'Владелец',
-                'format'=>'raw',
+                'format' => 'raw',
                 'value' => Html::a($model->owner->fullName, ['/admin/owner/view', 'id' => $model->owner->id]),
             ],
 
@@ -90,23 +90,23 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
 
                 'class' => \yii\grid\ActionColumn::className(),
                 'controller' => 'voyage',
-                'urlCreator'=>function($action, $model, $key, $index){
-                    return [$action,'id'=>$model->id,];
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    return [$action, 'id' => $model->id,];
                 },
-                'buttons'=>[
-                    'view'=>function ($url, $model) {
-                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/view','id'=>$model->id]);
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/view', 'id' => $model->id]);
 
-                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl );
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $customurl);
 
                     },
-                    'edit'=>function ($url, $model) {
-                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit','id'=>$model->id]);
-                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $customurl );
+                    'edit' => function ($url, $model) {
+                        $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit', 'id' => $model->id]);
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-pencil"></span>', $customurl);
                     },
-                    'delete'=>function ($url, $model) {
-                        $customurl=Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete','id'=>$model->id]);
-                        return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl );
+                    'delete' => function ($url, $model) {
+                        $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete', 'id' => $model->id]);
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl);
                     }
 
                 ],
@@ -130,21 +130,119 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     <div class='clearfix'></div>
     <?php $this->endBlock() ?>
 
+    <?php $this->beginBlock('Inaction'); ?>
+
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->carInactions,
+    ]);
+    ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+
+        'columns' => [
+
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'Начало простоя',
+                'value' => 'voyagePrev.unloading.fact'
+            ],
+            [
+                'attribute' => 'Окончание простоя',
+                'value' => 'voyageNext.loading.fact'
+            ],
+            'inactionTime',
+
+        ],
+    ]); ?>
+
+    <p class='pull-right'>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-list"></span> Полный список перевозок',
+            ['voyage/index'],
+            ['class' => 'btn text-muted btn-xs']
+        ) ?>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> Новая перевозка',
+            ['voyage/create', 'Voyage' => ['car_id' => $model->id]],
+            ['class' => 'btn btn-success btn-xs']
+        ) ?>
+    </p>
+
+    <div class='clearfix'></div>
+    <?php $this->endBlock() ?>
+
+    <?php $this->beginBlock('quarterInaction'); ?>
+
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->quarterInaction,
+    ]);
+    ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+
+        'columns' => [
+
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'Quarter',
+                'value' => 'quarter'
+            ],
+            [
+                'attribute' => 'Count',
+                'value' => 'count'
+            ],
+
+
+        ],
+    ]); ?>
+
+    <p class='pull-right'>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-list"></span> Полный список перевозок',
+            ['voyage/index'],
+            ['class' => 'btn text-muted btn-xs']
+        ) ?>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> Новая перевозка',
+            ['voyage/create', 'Voyage' => ['car_id' => $model->id]],
+            ['class' => 'btn btn-success btn-xs']
+        ) ?>
+    </p>
+
+    <div class='clearfix'></div>
+    <?php $this->endBlock() ?>
 
     <?=
     \yii\bootstrap\Tabs::widget(
         [
             'id' => 'relation-tabs',
             'encodeLabels' => false,
-            'items' => [[
-                'label' => '<span class="glyphicon glyphicon-asterisk"></span> Информация о машине',
-                'content' => $this->blocks['app\modules\admin\models\Car'],
-                'active' => true,
-            ], [
-                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Перевозки</small>',
-                'content' => $this->blocks['Voyages'],
-                'active' => false,
-            ],]
+            'items' => [
+                [
+                    'label' => '<span class="glyphicon glyphicon-asterisk"></span> Информация о машине',
+                    'content' => $this->blocks['app\modules\admin\models\Car'],
+                    'active' => true,
+                ],
+                [
+                    'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Перевозки</small>',
+                    'content' => $this->blocks['Voyages'],
+                    'active' => false,
+                ],
+                [
+                    'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Простои между перевозками</small>',
+                    'content' => $this->blocks['Inaction'],
+                    'active' => false,
+                ],
+                [
+                    'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Простои в кварталах</small>',
+                    'content' => $this->blocks['quarterInaction'],
+                    'active' => false,
+                ],
+            ]
         ]
     );
     ?>

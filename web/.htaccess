@@ -1,4 +1,5 @@
 # Rename this file to .htaccess to enable mod_rewrite if Yii uses urlFormat: path
+AddDefaultCharset UTF-8
 
 allow from all
 
