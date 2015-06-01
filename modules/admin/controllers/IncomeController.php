@@ -21,6 +21,7 @@ class IncomeController extends Controller
 	 */
 	public function actionIndex()
 	{
+        //$this->setIncome();
 		$searchModel = new IncomeSearch;
 		$dataProvider = $searchModel->search($_GET);
 
@@ -112,4 +113,24 @@ class IncomeController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+    /**
+     * Задает оплату водителя
+     */
+    public function setIncome() {
+        $incomes = Income::find()->all();
+        foreach($incomes as $income) {
+            if(!empty($income->voyage->cost->plan)) {
+                $costPlan =  $income->voyage->cost->plan;
+                $costDriver = $income->voyage->costDriver->costs;
+                $gasoline = 30;
+                $distance =  $income->voyage->distance->fact/100;
+                $costGasoline = 30*$gasoline*$distance;
+
+                $income->fact = $costPlan - $costDriver - $costGasoline;
+                $income->save();
+            }
+
+        }
+    }
 }

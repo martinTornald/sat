@@ -9,4 +9,7 @@ use Yii;
  */
 class Cost extends \app\modules\admin\models\base\Cost
 {
+    function getFullCost() {
+        return $this->fact;
+    }
 }

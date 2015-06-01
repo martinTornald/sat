@@ -21,6 +21,7 @@ class CostDriverController extends Controller
 	 */
 	public function actionIndex()
 	{
+        //$this->setCostDriver();
 		$searchModel = new CostDriverSearch;
 		$dataProvider = $searchModel->search($_GET);
 
@@ -112,4 +113,28 @@ class CostDriverController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+    /**
+     * Задает оплату водителя
+     */
+    public function setCostDriver() {
+        $costDrivers = CostDriver::find()->all();
+        foreach($costDrivers as $costDriver) {
+            switch($costDriver->voyage->car->id) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    $costDriver->costs = 3.500*$costDriver->voyage->distance->fact;
+                    $costDriver->save();
+                    break;
+                case 4:
+                case 5:
+                    $costDriver->costs = 4.000*$costDriver->voyage->distance->fact;
+                    $costDriver->save();
+                    break;
+            }
+            //
+        }
+    }
 }

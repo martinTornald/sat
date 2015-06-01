@@ -16,13 +16,15 @@ class CarInaction extends \app\modules\admin\models\base\CarInaction
      */
     public function getInactionTime($param = 1)
     {
+        $timeFormat = 60 * 60 * 24;
         $inactionTime = 0;
         $prev = strtotime($this->voyagePrev->unloading->fact);
         $next = strtotime($this->voyageNext->loading->fact);
         if ($next > $prev) {
-            $inactionTime = ( $next - $prev ) / $param;
+            $res = $next - $prev;
+            $inactionTime = $res / $timeFormat;
         }
-        return $inactionTime;
+        return  round($inactionTime, 0);
     }
 
 }

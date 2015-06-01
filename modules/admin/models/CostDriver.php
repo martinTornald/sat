@@ -9,4 +9,5 @@ use Yii;
  */
 class CostDriver extends \app\modules\admin\models\base\CostDriver
 {
+
 }

@@ -28,12 +28,12 @@ class Car extends \app\modules\admin\models\base\Car
     {
         $carInactions = $this->carInactions;
         $fullInaction = 0;
-        $timeFormat = 60 * 60 * 24;
+        $timeFormat = 60 * 60 * 24 ;
         foreach ($carInactions as $carInaction) {
-            $fullInaction += $carInaction->getInactionTime($timeFormat);
+            $fullInaction += $carInaction->inactionTime / $timeFormat;
         }
 
-        return round($fullInaction, 0);
+        return round($fullInaction/$timeFormat, 0);
     }
 
     /**

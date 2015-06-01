@@ -9,4 +9,5 @@ use Yii;
  */
 class Income extends \app\modules\admin\models\base\Income
 {
+
 }

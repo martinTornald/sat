@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use yii\data\ArrayDataProvider;
+use kartik\export\ExportMenu;
 
 /**
  * @var yii\web\View $this
@@ -145,14 +146,18 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
 
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'Начало простоя',
+                'attribute' => 'Start inaction',
                 'value' => 'voyagePrev.unloading.fact'
             ],
             [
-                'attribute' => 'Окончание простоя',
+                'attribute' => 'End inaction',
                 'value' => 'voyageNext.loading.fact'
             ],
-            'inactionTime',
+            [
+                'attribute' => 'Inaction (days)',
+                'value' =>  'inactionTime',
+            ],
+
 
         ],
     ]); ?>
@@ -174,31 +179,39 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     <?php $this->endBlock() ?>
 
     <?php $this->beginBlock('quarterInaction'); ?>
-
     <?php
+    $gridColumns = [
+        ['class' => 'yii\grid\SerialColumn'],
+        [
+            'attribute' => 'Quarter',
+            'value' => 'quarter'
+        ],
+        [
+            'attribute' => 'Inaction (days)',
+            'value' => 'count'
+        ],
+    ];
+
     $dataProvider = new ArrayDataProvider([
         'allModels' => $model->quarterInaction,
     ]);
     ?>
 
-    <?= GridView::widget([
+    <?php  echo  GridView::widget([
         'dataProvider' => $dataProvider,
+        'columns' => $gridColumns
+    ]);
 
-        'columns' => [
-
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'Quarter',
-                'value' => 'quarter'
-            ],
-            [
-                'attribute' => 'Count',
-                'value' => 'count'
-            ],
-
-
-        ],
-    ]); ?>
+    echo ExportMenu::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => $gridColumns,
+            'fontAwesome' => true,
+            'dropdownOptions' => [
+                'label' => 'Экспортировать',
+                'class' => 'btn btn-default'
+            ]
+        ]);
+    ?>
 
     <p class='pull-right'>
         <?= \yii\helpers\Html::a(

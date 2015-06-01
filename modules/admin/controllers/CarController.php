@@ -25,10 +25,19 @@ class CarController extends Controller
      */
     public function actionInaction()
     {
-        //$this->setInaction();
+
+
         return $this->render('inaction', [
             'cars' => Car::find()->all(),
         ]);
+    }
+
+    public function actionInactionUpdate()
+    {
+        $this->setInaction();
+        $this->getInaction();
+
+        return $this->redirect(Url::to('inaction'));
     }
 
     /**
@@ -202,5 +211,17 @@ class CarController extends Controller
 
             }
         }
+    }
+
+    public function getInaction() {
+        $fileStat = fopen('statistics/stat.csv', 'w');
+        $cars = Car::find()->all();
+        foreach ($cars as $car) {
+            $quarterInactions = $car->quarterInaction;
+            foreach ($quarterInactions as $quarterInaction) {
+                fputcsv($fileStat, array($car->id,$quarterInaction['start'],$quarterInaction['end'],$quarterInaction['count']));
+            }
+        }
+        fclose($fileStat);
     }
 }
