@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\Car;
 use app\modules\admin\models\SparePart;
 use app\modules\admin\models\SparePartSearch;
 use yii\web\Controller;
@@ -9,22 +10,64 @@ use yii\web\HttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
+use dmstr\bootstrap\Tabs;
 
 /**
  * SparePartController implements the CRUD actions for SparePart model.
  */
 class SparePartController extends Controller
 {
+    /**
+     * @var boolean whether to enable CSRF validation for the actions in this controller.
+     * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
+     */
+    public $enableCsrfValidation = false;
+
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'rules' => [
+					[
+						'allow' 	=> true,
+						'actions'   => ['index', 'view', 'create', 'update', 'delete'],
+						'roles'     => ['@']
+					]
+				]
+			]
+		];
+	}
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 	/**
 	 * Lists all SparePart models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new SparePartSearch;
+		$searchModel  = new SparePartSearch;
 		$dataProvider = $searchModel->search($_GET);
 
+		Tabs::clearLocalStorage();
+
         Url::remember();
+        \Yii::$app->session['__crudReturnUrl'] = null;
+
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
@@ -34,11 +77,18 @@ class SparePartController extends Controller
 	/**
 	 * Displays a single SparePart model.
 	 * @param integer $id
+     *
 	 * @return mixed
 	 */
 	public function actionView($id)
 	{
-        Url::remember();
+        $resolved = \Yii::$app->request->resolve();
+        $resolved[1]['_pjax'] = null;
+        $url = Url::to(array_merge(['/'.$resolved[0]],$resolved[1]));
+        \Yii::$app->session['__crudReturnUrl'] = Url::previous();
+        Url::remember($url);
+        Tabs::rememberActiveState();
+
         return $this->render('view', [
 			'model' => $this->findModel($id),
 		]);
@@ -63,7 +113,10 @@ class SparePartController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
-        return $this->render('create', ['model' => $model,]);
+        return $this->render('create', [
+            'model' => $model,
+            'cars' => Car::find()->all(),
+        ]);
 	}
 
 	/**
@@ -81,6 +134,7 @@ class SparePartController extends Controller
 		} else {
 			return $this->render('update', [
 				'model' => $model,
+                'cars' => Car::find()->all(),
 			]);
 		}
 	}
@@ -93,8 +147,27 @@ class SparePartController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->findModel($id)->delete();
-		return $this->redirect(Url::previous());
+        try {
+            $this->findModel($id)->delete();
+        } catch (\Exception $e) {
+            $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
+            \Yii::$app->getSession()->setFlash('error', $msg);
+            return $this->redirect(Url::previous());
+        }
+
+        // TODO: improve detection
+        $isPivot = strstr('$id',',');
+        if ($isPivot == true) {
+            return $this->redirect(Url::previous());
+        } elseif (isset(\Yii::$app->session['__crudReturnUrl']) && \Yii::$app->session['__crudReturnUrl'] != '/') {
+			Url::remember(null);
+			$url = \Yii::$app->session['__crudReturnUrl'];
+			\Yii::$app->session['__crudReturnUrl'] = null;
+
+			return $this->redirect($url);
+        } else {
+            return $this->redirect(['index']);
+        }
 	}
 
 	/**

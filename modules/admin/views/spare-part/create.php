@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 
 /**
-* @var yii\web\View $this
-* @var app\modules\admin\models\SparePart $model
-*/
+ * @var yii\web\View $this
+ * @var app\modules\admin\models\SparePart $model
+ */
 
-$this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Spare Parts', 'url' => ['index']];
+$this->title = 'Создать';
+$this->params['breadcrumbs'][] = ['label' => 'Запчасти', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="spare-part-create">
@@ -16,10 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p class="pull-left">
         <?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
     </p>
+
     <div class="clearfix"></div>
 
-    <?php echo $this->render('_form', [
-    'model' => $model,
-    ]); ?>
+    <?= $this->render('_form', [
+        'model' => $model,
+        'cars' => $cars
+    ]);
+    ?>
 
 </div>
