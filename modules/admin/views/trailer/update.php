@@ -10,7 +10,6 @@ use yii\helpers\Html;
 $this->title = 'Редактирование трейлера ' . $model->fullName . '';
 $this->params['breadcrumbs'][] = ['label' => 'Прицепы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->fullName, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="trailer-update">
 

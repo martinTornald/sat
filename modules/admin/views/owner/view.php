@@ -11,10 +11,9 @@ use yii\data\ArrayDataProvider;
  * @var app\modules\admin\models\Owner $model
  */
 
-$this->title = 'Owner View ' . $model->name . '';
-$this->params['breadcrumbs'][] = ['label' => 'Owners', 'url' => ['index']];
+$this->title = 'Просмотр владельцы' . $model->name . '';
+$this->params['breadcrumbs'][] = ['label' => 'Владельцы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'View';
 ?>
 <div class="owner-view">
 

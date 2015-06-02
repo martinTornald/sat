@@ -81,6 +81,7 @@ class Module extends \yii\base\Module
                 case 'debug': break;
                 case 'packaii': break;
                 case 'gii': //  break;
+                case 'gridview': break;
                 case 'admin':
                 case 'user':
 

@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var app\modules\admin\models\TrailerSearch $searchModel
  */
 
-$this->title = 'Trailers';
+$this->title = 'Прицепы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -57,6 +57,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php echo GridView::widget([
+        'layout' => '{summary}{pager}{items}{pager}',
+        'pager' => [
+            'class' => yii\widgets\LinkPager::className(),
+            'firstPageLabel' => 'Первая',
+            'lastPageLabel' => 'Последняя'],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [

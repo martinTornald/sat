@@ -9,16 +9,16 @@ use yii\helpers\ArrayHelper;
 
 /**
 * @var yii\web\View $this
-* @var app\modules\admin\models\SparePart $model
+* @var app\modules\admin\models\DriverDistance $model
 * @var yii\widgets\ActiveForm $form
 */
 
 ?>
 
-<div class="spare-part-form">
+<div class="driver-distance-form">
 
     <?php $form = ActiveForm::begin([
-                        'id'     => 'SparePart',
+                        'id'     => 'DriverDistance',
                         'layout' => 'horizontal',
                         'enableClientValidation' => false,
                     ]
@@ -27,48 +27,36 @@ use yii\helpers\ArrayHelper;
 
     <div class="">
         <?php echo $form->errorSummary($model); ?>
-        <?php $this->beginBlock('main'); ?>
+
 
         <p>
-
+            <?= $form->field($model, 'driver_id')->dropDownList(
+                ArrayHelper::map($drivers, 'id', 'fullName')
+            ) ?>
             <?= $form->field($model, 'car_id')->dropDownList(
                 ArrayHelper::map($cars, 'id', 'fullName')
             ) ?>
-            <?= $form->field($model, 'plan')->checkbox(); ?>
-
-			<?= $form->field($model, 'price')->textInput() ?>
+            <?= $form->field($model, 'voyage_id')->dropDownList(
+                ArrayHelper::map($voyages, 'id', 'name')
+            ) ?>
+            <?= $form->field($model, 'is_tend')->checkbox(); ?>
+			<?= $form->field($model, 'distance')->textInput() ?>
             <?= $form->field($model, 'date')->widget(
                 DatePicker::className(), [
                 'language' => 'ru',
                 'inline' => false,
-                // modify template for custom rendering
                 //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
                 'clientOptions' => [
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ]
             ]);?>
-			<?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
         </p>
-        <?php $this->endBlock(); ?>
-        
-        <?=
-    Tabs::widget(
-                 [
-                   'encodeLabels' => false,
-                     'items' => [ [
-    'label'   => 'SparePart',
-    'content' => $this->blocks['main'],
-    'active'  => true,
-], ]
-                 ]
-    );
-    ?>
-        <hr/>
+
 
         <?= Html::submitButton(
                 '<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord
-                            ? 'Create' : 'Save'),
+                            ? 'Создать' : 'Сохранить'),
                 [
                     'id'    => 'save-' . $model->formName(),
                     'class' => 'btn btn-success'

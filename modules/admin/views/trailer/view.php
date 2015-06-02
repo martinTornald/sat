@@ -14,7 +14,6 @@ use yii\data\ArrayDataProvider;
 $this->title = 'Просмотр трейлера ' . $model->fullName . '';
 $this->params['breadcrumbs'][] = ['label' => 'Trailers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->fullName, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'View';
 ?>
 <!-- TRAILER-VIEW -->
 <div class="trailer-view">
@@ -27,7 +26,7 @@ $this->params['breadcrumbs'][] = 'View';
     </p>
 
     <p class='pull-right'>
-        <?= Html::a('<span class="glyphicon glyphicon-list"></span> List', ['index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-list"></span> Полный список', ['index'], ['class' => 'btn btn-default']) ?>
     </p>
 
     <div class='clearfix'></div>

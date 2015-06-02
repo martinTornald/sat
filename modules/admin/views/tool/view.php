@@ -10,10 +10,10 @@ use yii\widgets\Pjax;
  * @var app\modules\admin\models\Tool $model
  */
 
-$this->title = 'Tool View ' . $model->name . '';
+$this->title = 'Просмотр инструмента ' . $model->name . '';
 $this->params['breadcrumbs'][] = ['label' => 'Инструменты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'View';
+
 ?>
 <!-- TOOL-VIEW -->
 <div class="tool-view">

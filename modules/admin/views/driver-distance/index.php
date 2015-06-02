@@ -7,21 +7,21 @@ use yii\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var app\modules\admin\models\SparePartSearch $searchModel
+ * @var app\modules\admin\models\DriverDistanceSearch $searchModel
  */
 
-$this->title = 'Spare Parts';
+$this->title = 'Дистанция';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="spare-part-index">
+<div class="driver-distance-index">
 
     <?php //     echo $this->render('_search', ['model' =>$searchModel]);
     ?>
 
     <div class="clearfix">
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'Новая' . ' запчасть', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'Новая' . '  дистанция', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">
@@ -45,6 +45,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'car/index',
                                 ],
                             ],
+                            [
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Водители</i>',
+                                'url' => [
+                                    'driver/index',
+                                ],
+                            ],
+                            [
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Перевозки</i>',
+                                'url' => [
+                                    'voyage/index',
+                                ],
+                            ],
                         ]],
                 ]
             );
@@ -55,22 +67,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="table-responsive">
         <?= GridView::widget([
             'layout' => '{summary}{pager}{items}{pager}',
+            'dataProvider' => $dataProvider,
             'pager' => [
                 'class' => yii\widgets\LinkPager::className(),
                 'firstPageLabel' => 'Первая',
                 'lastPageLabel' => 'Последняя'],
-            'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-
                 'id',
+                [
+                    'attribute' => 'driver_id',
+                    'value' => 'driver.fullName'
+                ],
                 [
                     'attribute' => 'car_id',
                     'value' => 'car.fullName'
                 ],
-                'name',
-                'plan',
-                'price',
+                [
+                    'attribute' => 'voyage_id',
+                    'value' => 'voyage.name'
+                ],
+                [
+                    'attribute' => 'voyage_id',
+                    'value' => 'voyage.name'
+                ],
+                [
+                    'attribute' => 'is_tent',
+                    'value' => 'tent'
+                ],
+                'distance',
                 'date',
                 [
                     'class' => 'yii\grid\ActionColumn',

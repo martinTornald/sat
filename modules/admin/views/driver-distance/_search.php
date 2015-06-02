@@ -5,12 +5,12 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\admin\models\VoyageSearch $model
+ * @var app\modules\admin\models\DriverDistanceSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
 
-<div class="voyage-search">
+<div class="driver-distance-search">
 
 	<?php $form = ActiveForm::begin([
 		'action' => ['index'],
@@ -19,23 +19,17 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'id') ?>
 
-		<?= $form->field($model, 'customer_id') ?>
+		<?= $form->field($model, 'driver_id') ?>
 
 		<?= $form->field($model, 'car_id') ?>
 
-		<?= $form->field($model, 'trailer_id') ?>
+		<?= $form->field($model, 'voyage_id') ?>
 
-		<?= $form->field($model, 'driver_id') ?>
+		<?= $form->field($model, 'is_tend') ?>
 
-		<?php // echo $form->field($model, 'status_id') ?>
+		<?php // echo $form->field($model, 'distance') ?>
 
-		<?php // echo $form->field($model, 'name') ?>
-
-		<?php // echo $form->field($model, 'description') ?>
-
-		<?php // echo $form->field($model, 'updated') ?>
-
-		<?php // echo $form->field($model, 'created_at') ?>
+		<?php // echo $form->field($model, 'date') ?>
 
 		<div class="form-group">
 			<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

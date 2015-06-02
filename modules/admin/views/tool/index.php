@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var app\modules\admin\models\ToolSearch $searchModel
  */
 
-$this->title = 'Tools';
+$this->title = 'Инструменты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

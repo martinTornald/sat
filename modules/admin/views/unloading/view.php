@@ -10,10 +10,10 @@ use yii\widgets\Pjax;
  * @var app\modules\admin\models\Unloading $model
  */
 
-$this->title = 'Unloading View ' . $model->voyage_id . '';
-$this->params['breadcrumbs'][] = ['label' => 'Unloadings', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->voyage_id, 'url' => ['view', 'voyage_id' => $model->voyage_id]];
-$this->params['breadcrumbs'][] = 'View';
+$this->title = 'Просмотр разгрузки ' . $model->voyage_id . '';
+$this->params['breadcrumbs'][] = ['label' => 'Разгрузки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->voyage->name, 'url' => ['view', 'voyage_id' => $model->voyage_id]];
+
 ?>
 
 <!-- UNLOADING-VIEW -->

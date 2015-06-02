@@ -39,93 +39,81 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items' => [
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Cost</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Стоимость</i>',
                                 'url' => [
                                     'cost/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Cost Driver</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Оплата водителей</i>',
                                 'url' => [
                                     'cost-driver/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Distance</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Разтояние</i>',
                                 'url' => [
                                     'distance/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Income</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Стоимость</i>',
                                 'url' => [
                                     'income/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Loading</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Загрузки</i>',
                                 'url' => [
                                     'loading/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Rate</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Статусы оплат</i>',
                                 'url' => [
                                     'rate/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Spare Part</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Запчасти</i>',
                                 'url' => [
                                     'spare-part/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Unloading</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Разгрузки</i>',
                                 'url' => [
                                     'unloading/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Car</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Машины</i>',
                                 'url' => [
                                     'car/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Customer</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Заказчики</i>',
                                 'url' => [
                                     'customer/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Driver</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Водители</i>',
                                 'url' => [
                                     'driver/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Status</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Статусы</i>',
                                 'url' => [
                                     'status/index',
                                 ],
                             ],
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Trailer</i>',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Прицепы</i>',
                                 'url' => [
                                     'trailer/index',
-                                ],
-                            ],
-                            [
-                                'label' => '<i class="glyphicon glyphicon-random"> Voyage Spare Path</i>',
-                                'url' => [
-                                    'voyage-spare-path/index',
-                                ],
-                            ],
-                            [
-                                'label' => '<i class="glyphicon glyphicon-arrow-right"> Spare Part</i>',
-                                'url' => [
-                                    'spare-part/index',
                                 ],
                             ],
                         ]],
@@ -139,9 +127,13 @@ $this->params['breadcrumbs'][] = $this->title;
     $dataProvider->sort = ['defaultOrder' => ['id' => 'DESC']];
 
     echo GridView::widget([
+        'layout' => '{summary}{pager}{items}{pager}',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-
+        'pager' => [
+            'class' => yii\widgets\LinkPager::className(),
+            'firstPageLabel' => 'Первая',
+            'lastPageLabel' => 'Последняя'],
         'columns' => [
 
             'id',

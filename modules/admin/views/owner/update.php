@@ -7,10 +7,9 @@ use yii\helpers\Html;
  * @var app\modules\admin\models\Owner $model
  */
 
-$this->title = 'Owner Update ' . $model->name . '';
-$this->params['breadcrumbs'][] = ['label' => 'Owners', 'url' => ['index']];
+$this->title = 'Редактирование владельца ' . $model->name . '';
+$this->params['breadcrumbs'][] = ['label' => 'Владельцы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="owner-update">
 
