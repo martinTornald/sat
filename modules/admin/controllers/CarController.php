@@ -25,8 +25,6 @@ class CarController extends Controller
      */
     public function actionInaction()
     {
-
-
         return $this->render('inaction', [
             'cars' => Car::find()->all(),
         ]);

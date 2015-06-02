@@ -31,4 +31,59 @@ class Driver extends \app\modules\admin\models\base\Driver
         }
         parent::afterSave($insert, $changedAttributes);
     }
+
+    /**
+     * @return array
+     */
+    public function getDataArray()
+    {
+        $data = array();
+        $currentYear = date('Y');
+        $currentMount = date('m');
+
+        for ($year = $currentYear; $year >= 2014; $year--) {
+            if($year == $currentYear) {
+                $mount = $currentMount;
+            } else {
+                $mount = 12;
+            }
+            for (; $mount > 0; $mount--) {
+                array_push($data, array(
+                        'period' => $year . '-' . sprintf('%02d', $mount),
+                        'count' => 0
+                    )
+                );
+            }
+
+
+        }
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMountDistance()
+    {
+        $mountDistances = $this->getDataArray();
+        $voyages = $this->voyages;
+
+        foreach($voyages as $voyage) {
+            $voyageMountDistances = $voyage->mountDistance;
+
+            foreach($voyageMountDistances as $key => $voyageMountDistance) {
+                $i = 0;
+                while( $mountDistances[$i]['period'] != $key &&  $i < count($mountDistances) ) {
+                    $i++;
+                }
+                if($i != count($mountDistances)) {
+                    $mountDistances[$i]['count'] += $voyageMountDistance;
+                }
+
+            }
+
+        }
+        return $mountDistances;
+    }
+
 }

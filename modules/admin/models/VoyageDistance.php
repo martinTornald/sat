@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "driver_distance".
  */
-class DriverDistance extends \app\modules\admin\models\base\DriverDistance
+class VoyageDistance extends \app\modules\admin\models\base\VoyageDistance
 {
     /**
      * @return string

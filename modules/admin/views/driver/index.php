@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="clearfix">
         <p class="pull-left">
             <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Обновить информацию о дистанциях', ['distance-update'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">

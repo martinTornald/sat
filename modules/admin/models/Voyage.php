@@ -12,6 +12,15 @@ use yii\db\BaseActiveRecord;
  */
 class Voyage extends \app\modules\admin\models\base\Voyage
 {
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->name . ' (' . $this->id . ')';
+    }
+
+
     public function behaviors()
     {
         return [
@@ -94,4 +103,18 @@ class Voyage extends \app\modules\admin\models\base\Voyage
     }
 
 
+    public function getMountDistance()
+    {
+        $data = array();
+        $voyageDistances = $this->voyageDistances;
+        foreach($voyageDistances as $voyageDistance) {
+            $path = date('Y-m', strtotime($voyageDistance->date));
+            if(empty($data[$path])) {
+
+                $data[$path] = 0;
+            }
+            $data[$path] += $voyageDistance->distance;
+        }
+        return $data;
+    }
 }

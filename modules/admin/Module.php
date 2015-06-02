@@ -73,6 +73,7 @@ class Module extends \yii\base\Module
             'trailer'       => ['label' => '<i class="fa fa-truck"></i> <span>Прицепы</span>',                  'url' => ['/admin/trailer']],
             'unloading'     => ['label' => '<i class="fa fa-upload"></i> <span>Разгрузка</span>',               'url' => ['/admin/unloading']],
             'voyage'        => ['label' => '<i class="fa fa-share-alt"></i> <span>Перевозки</span>',            'url' => ['/admin/voyage']],
+            'voyage_distance'   => ['label' => '<i class="fa fa-exchange"></i> <span>Дистанции перевозок</span>',   'url' => ['/admin/voyage-distance']],
         ];
 
         foreach (\Yii::$app->getModules() AS $name => $m) {

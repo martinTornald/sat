@@ -165,24 +165,63 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['vi
     <div class='clearfix'></div>
     <?php $this->endBlock() ?>
 
+    <?php $this->beginBlock('Voyages distance'); ?>
+    <?php
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $model->mountDistance,
+    ]);
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'period',
+            'count'
+        ],
+    ]); ?>
+
+    <p class='pull-right'>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-list"></span> List All Voyages',
+            ['voyage/index'],
+            ['class' => 'btn text-muted btn-xs']
+        ) ?>
+        <?= \yii\helpers\Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> New Voyage',
+            ['voyage/create', 'Voyage' => ['driver_id' => $model->id]],
+            ['class' => 'btn btn-success btn-xs']
+        ) ?>
+    </p>
+
+    <div class='clearfix'></div>
+    <?php $this->endBlock() ?>
 
     <?= \yii\bootstrap\Tabs::widget(
         [
             'id' => 'relation-tabs',
             'encodeLabels' => false,
-            'items' => [[
-                'label' => '<span class="glyphicon glyphicon-asterisk"></span> Информация о водителе',
-                'content' => $this->blocks['app\modules\admin\models\Driver'],
-                'active' => true,
-            ], [
-                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Выданные инструенты</small>',
-                'content' => $this->blocks['DriverTools'],
-                'active' => false,
-            ], [
-                'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Перевозки</small>',
-                'content' => $this->blocks['Voyages'],
-                'active' => false,
-            ],]
+            'items' => [
+                [
+                    'label' => '<span class="glyphicon glyphicon-asterisk"></span> Информация о водителе',
+                    'content' => $this->blocks['app\modules\admin\models\Driver'],
+                    'active' => true,
+                ],
+                [
+                    'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Выданные инструенты</small>',
+                    'content' => $this->blocks['DriverTools'],
+                    'active' => false,
+                ],
+                [
+                    'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Перевозки</small>',
+                    'content' => $this->blocks['Voyages'],
+                    'active' => false,
+                ],
+                [
+                    'label' => '<small><span class="glyphicon glyphicon-paperclip"></span> Дистанции перевозок</small>',
+                    'content' => $this->blocks['Voyages distance'],
+                    'active' => false,
+                ],
+            ]
         ]
     );
     ?>

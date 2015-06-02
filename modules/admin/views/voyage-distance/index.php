@@ -7,21 +7,21 @@ use yii\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var app\modules\admin\models\DriverDistanceSearch $searchModel
+ * @var app\modules\admin\models\VoyageDistanceSearch $searchModel
  */
 
-$this->title = 'Дистанция';
+$this->title = 'Дистанции перевозок';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="driver-distance-index">
+<div class="voyage-distance-index">
 
     <?php //     echo $this->render('_search', ['model' =>$searchModel]);
     ?>
 
     <div class="clearfix">
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'Новая' . '  дистанция', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'Добавить' , ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">
@@ -40,18 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items' => [
                             [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Машины</i>',
-                                'url' => [
-                                    'car/index',
-                                ],
-                            ],
-                            [
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"> Водители</i>',
-                                'url' => [
-                                    'driver/index',
-                                ],
-                            ],
-                            [
                                 'label' => '<i class="glyphicon glyphicon-arrow-left"> Перевозки</i>',
                                 'url' => [
                                     'voyage/index',
@@ -60,12 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]],
                 ]
             );
-            ?>        </div>
+            ?>
+        </div>
     </div>
 
 
     <div class="table-responsive">
-        <?= GridView::widget([
+        <?php
+        $dataProvider->sort = ['defaultOrder' => ['id' => 'DESC']];
+
+        echo GridView::widget([
             'layout' => '{summary}{pager}{items}{pager}',
             'dataProvider' => $dataProvider,
             'pager' => [
@@ -76,20 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 'id',
                 [
-                    'attribute' => 'driver_id',
-                    'value' => 'driver.fullName'
-                ],
-                [
-                    'attribute' => 'car_id',
-                    'value' => 'car.fullName'
-                ],
-                [
                     'attribute' => 'voyage_id',
-                    'value' => 'voyage.name'
-                ],
-                [
-                    'attribute' => 'voyage_id',
-                    'value' => 'voyage.name'
+                    'value' => 'voyage.fullName'
                 ],
                 [
                     'attribute' => 'is_tent',

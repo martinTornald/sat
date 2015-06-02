@@ -15,10 +15,10 @@ use Yii;
  * @property string $address
  * @property string $phone
  *
- * @property DriverTool[] $driverTools
- * @property Tool[] $tools
- * @property License $license
- * @property Voyage[] $voyages
+ * @property \app\modules\admin\models\DriverTool[] $driverTools
+ * @property \app\modules\admin\models\Tool[] $tools
+ * @property \app\modules\admin\models\License $license
+ * @property \app\modules\admin\models\Voyage[] $voyages
  */
 class Driver extends \yii\db\ActiveRecord
 {
@@ -48,13 +48,13 @@ class Driver extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'passport' => Yii::t('app', 'Паспорт'),
-            'surname' => Yii::t('app', 'Фамилия'),
-            'name' => Yii::t('app', 'Имя'),
-            'patronymic' => Yii::t('app', 'Отчество'),
-            'address' => Yii::t('app', 'Адрес'),
-            'phone' => Yii::t('app', 'Телефон'),
+            'id' => 'ID',
+            'passport' => 'Паспорт',
+            'surname' => 'Фамилия',
+            'name' => 'Имя',
+            'patronymic' => 'Отчество',
+            'address' => 'Адрес',
+            'phone' => 'Телефон',
         ];
     }
 

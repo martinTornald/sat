@@ -18,20 +18,20 @@ use Yii;
  * @property string $updated_at
  * @property string $created_at
  *
- * @property Cost $cost
- * @property CostDriver $costDriver
- * @property Distance $distance
- * @property Income $income
- * @property Loading $loading
- * @property Rate $rate
- * @property Unloading $unloading
- * @property Status $status
- * @property Car $car
- * @property Customer $customer
- * @property Driver $driver
- * @property Trailer $trailer
- * @property VoyageSparePath[] $voyageSparePaths
- * @property SparePart[] $spareParts
+ * @property \app\modules\admin\models\CarInaction[] $carInactions
+ * @property \app\modules\admin\models\Cost $cost
+ * @property \app\modules\admin\models\CostDriver $costDriver
+ * @property \app\modules\admin\models\Distance $distance
+ * @property \app\modules\admin\models\Income $income
+ * @property \app\modules\admin\models\Loading $loading
+ * @property \app\modules\admin\models\Rate $rate
+ * @property \app\modules\admin\models\Unloading $unloading
+ * @property \app\modules\admin\models\Car $car
+ * @property \app\modules\admin\models\Customer $customer
+ * @property \app\modules\admin\models\Driver $driver
+ * @property \app\modules\admin\models\Status $status
+ * @property \app\modules\admin\models\Trailer $trailer
+ * @property \app\modules\admin\models\VoyageDistance[] $voyageDistances
  */
 class Voyage extends \yii\db\ActiveRecord
 {
@@ -62,17 +62,25 @@ class Voyage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'customer_id' => Yii::t('app', 'Заказчик'),
-            'car_id' => Yii::t('app', 'Машина'),
-            'trailer_id' => Yii::t('app', 'Прицеп'),
-            'driver_id' => Yii::t('app', 'Водитель'),
-            'status_id' => Yii::t('app', 'Статус'),
-            'name' => Yii::t('app', 'Название перевозки'),
-            'description' => Yii::t('app', 'Описание перевозки'),
-            'updated_at' => Yii::t('app', 'Дата обновления'),
-            'created_at' => Yii::t('app', 'Дата создания'),
+            'id' => 'ID',
+            'customer_id' => 'Заказчик',
+            'car_id' => 'Машина',
+            'trailer_id' => 'Прицеп',
+            'driver_id' => 'Водитель',
+            'status_id' => 'Статус',
+            'name' => 'Название перевозки',
+            'description' => 'Описание перевозки',
+            'updated_at' => 'Дата обновления',
+            'created_at' => 'Дата создания',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarInactions()
+    {
+        return $this->hasMany(\app\modules\admin\models\CarInaction::className(), ['voyage_prev' => 'id']);
     }
 
     /**
@@ -134,14 +142,6 @@ class Voyage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStatus()
-    {
-        return $this->hasOne(\app\modules\admin\models\Status::className(), ['id' => 'status_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getCar()
     {
         return $this->hasOne(\app\modules\admin\models\Car::className(), ['id' => 'car_id']);
@@ -166,6 +166,14 @@ class Voyage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getStatus()
+    {
+        return $this->hasOne(\app\modules\admin\models\Status::className(), ['id' => 'status_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTrailer()
     {
         return $this->hasOne(\app\modules\admin\models\Trailer::className(), ['id' => 'trailer_id']);
@@ -174,16 +182,8 @@ class Voyage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVoyageSparePaths()
+    public function getVoyageDistances()
     {
-        return $this->hasMany(\app\modules\admin\models\VoyageSparePath::className(), ['voyage_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSpareParts()
-    {
-        return $this->hasMany(\app\modules\admin\models\SparePart::className(), ['id' => 'spare_part_id'])->viaTable('voyage_spare_path', ['voyage_id' => 'id']);
+        return $this->hasMany(\app\modules\admin\models\VoyageDistance::className(), ['voyage_id' => 'id']);
     }
 }

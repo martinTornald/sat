@@ -4,14 +4,14 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\admin\models\DriverDistance $model
+ * @var app\modules\admin\models\VoyageDistance $model
  */
 
-$this->title = 'Добавление новой дистанции';
-$this->params['breadcrumbs'][] = ['label' => 'Добавление новой дистанции', 'url' => ['index']];
+$this->title = 'Создание';
+$this->params['breadcrumbs'][] = ['label' => 'Дистанции перевозок', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="driver-distance-create">
+<div class="voyage-distance-create">
 
     <p class="pull-left">
         <?= Html::a('Отмена', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
@@ -21,8 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'cars' => $cars,
-        'drivers' => $drivers,
         'voyages' => $voyages,
     ]); ?>
 

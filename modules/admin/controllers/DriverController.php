@@ -32,6 +32,12 @@ class DriverController extends Controller
 		]);
 	}
 
+    public function actionDistanceUpdate()
+    {
+        $this->getDistance();
+        return $this->redirect(Url::to('index'));
+    }
+
 	/**
 	 * Displays a single Driver model.
 	 * @param integer $id
@@ -113,4 +119,16 @@ class DriverController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+    public function getDistance() {
+        $fileStat = fopen('statistics/stat-distance.csv', 'w');
+        $drivers = Driver::find()->all();
+        foreach ($drivers as $driver) {
+            $mountDistances = $driver->mountDistance;
+            foreach ($mountDistances as $mountDistance) {
+                fputcsv($fileStat, array($driver->id,$mountDistance['period'],$mountDistance['count']));
+            }
+        }
+        fclose($fileStat);
+    }
 }

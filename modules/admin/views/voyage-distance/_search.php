@@ -5,12 +5,12 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\admin\models\DriverDistanceSearch $model
+ * @var app\modules\admin\models\VoyageDistanceSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
 
-<div class="driver-distance-search">
+<div class="voyage-distance-search">
 
 	<?php $form = ActiveForm::begin([
 		'action' => ['index'],
@@ -19,17 +19,13 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'id') ?>
 
-		<?= $form->field($model, 'driver_id') ?>
-
-		<?= $form->field($model, 'car_id') ?>
-
 		<?= $form->field($model, 'voyage_id') ?>
 
-		<?= $form->field($model, 'is_tend') ?>
+		<?= $form->field($model, 'is_tent') ?>
 
-		<?php // echo $form->field($model, 'distance') ?>
+		<?= $form->field($model, 'distance') ?>
 
-		<?php // echo $form->field($model, 'date') ?>
+		<?= $form->field($model, 'date') ?>
 
 		<div class="form-group">
 			<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
