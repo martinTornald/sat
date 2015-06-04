@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 $this->title .= 'Yii 2.0 App Template';
 ?>
+
 <div class="site-index ">
 
     <div class="header vert">
