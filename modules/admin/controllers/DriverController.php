@@ -32,6 +32,20 @@ class DriverController extends Controller
 		]);
 	}
 
+    public function actionDistance(){
+
+        $drivers = Driver::find()->all();
+        $data = array();
+        foreach ($drivers as $driver) {
+            $mountDistances = $driver->mountDistance;
+            array_push($data, $mountDistances);
+        }
+
+        return $this->render('distance', [
+            'data' => $data,
+        ]);
+    }
+
     public function actionDistanceUpdate()
     {
         $this->getDistance();
@@ -126,7 +140,7 @@ class DriverController extends Controller
         foreach ($drivers as $driver) {
             $mountDistances = $driver->mountDistance;
             foreach ($mountDistances as $mountDistance) {
-                fputcsv($fileStat, array($driver->id,$mountDistance['period'],$mountDistance['count']));
+                fputcsv($fileStat, array($driver->fullName,$mountDistance['period'],$mountDistance['count']), ';');
             }
         }
         fclose($fileStat);
