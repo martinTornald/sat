@@ -75,6 +75,8 @@ class Module extends \yii\base\Module
             'voyage'        => ['label' => '<i class="fa fa-share-alt"></i> <span>Перевозки</span>',            'url' => ['/admin/voyage']],
             'voyage_distance'   => ['label' => '<i class="fa fa-exchange"></i> <span>Дистанции перевозок</span>',   'url' => ['/admin/voyage-distance']],
             'stat'   => ['label' => '<i class="fa fa-line-chart"></i> <span>Статистика</span>',   'url' => ['/admin/stat']],
+            'stat_income'   => ['label' => '<i class="fa fa-line-chart"></i> <span>Статистика Доходы</span>',   'url' => ['/admin/stat-income']],
+            'stat_expense'   => ['label' => '<i class="fa fa-line-chart"></i> <span>Статистика Расходы</span>',   'url' => ['/admin/stat-expense']],
         ];
 
         foreach (\Yii::$app->getModules() AS $name => $m) {

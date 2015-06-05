@@ -43,7 +43,7 @@ class StatIncome extends \yii\db\ActiveRecord
         return [
             'stat_id' => 'Stat ID',
             'plan' => 'Планируемая прибль',
-            'fact' => 'Fact',
+            'fact' => 'Чистая прибль',
         ];
     }
 

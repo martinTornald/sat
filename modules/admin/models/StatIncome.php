@@ -9,4 +9,5 @@ use Yii;
  */
 class StatIncome extends \app\modules\admin\models\base\StatIncome
 {
+
 }
