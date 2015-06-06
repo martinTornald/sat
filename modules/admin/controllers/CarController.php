@@ -32,7 +32,7 @@ class CarController extends Controller
 
     public function actionInactionUpdate()
     {
-        $this->setInaction();
+        $this->updateInaction();
         $this->getInaction();
 
         return $this->redirect(Url::to('inaction'));
@@ -163,6 +163,66 @@ class CarController extends Controller
         return $years;
     }
 
+    /**
+     * Задает простои машин
+     */
+    public function updateInaction() {
+        $cars = Car::find()->all();
+        $voyage_prev = null;
+        $voyage_next = null;
+
+        foreach ($cars as $car) {
+            $inactions = $car->carInactions;
+            $skey = 0;
+            $voyages = $car->voyages;
+
+            if (count($voyages) > 1) {
+                foreach ($voyages as $key => $voyage) {
+                    if (strtotime($voyage->loading->fact) < strtotime($voyages[$skey]->loading->fact)) {
+                        $skey = $key;
+                    }
+                }
+                $voyage_prev = $voyages[$skey];
+                array_splice ($voyages,$skey,1);
+                $skey = 0;
+            }
+            while (count($voyages) > 0) {
+                $skey = 0;
+                foreach ($voyages as $key => $voyage) {
+                    if (strtotime($voyage->loading->fact) <= strtotime($voyages[$skey]->loading->fact)) {
+                        $skey = $key;
+                    }
+                }
+
+                $voyage_next = $voyages[$skey];
+                array_splice ($voyages,$skey,1);
+                if(strtotime($voyage_prev->unloading->fact) < strtotime($voyage_next->loading->fact)) {
+
+                    $isInaction = false;
+                    foreach ($inactions as $inaction) {
+                        if($inaction->voyage_prev == $voyage_prev->id && $inaction->voyage_next == $voyage_next->id) {
+                            $isInaction = true;
+                            break;
+                        }
+                    }
+
+                    if(!$isInaction) {
+                        $carInaction = new CarInaction();
+                        $carInaction->car_id = $car->id;
+                        $carInaction->voyage_prev = $voyage_prev->id;
+                        $carInaction->voyage_next = $voyage_next->id;
+                        $carInaction->save(false);
+                    }
+
+                    $voyage_prev = $voyage_next;
+
+                }
+
+
+
+            }
+        }
+    }
     /**
      * Задает простои машин
      */

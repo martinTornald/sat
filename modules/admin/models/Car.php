@@ -82,7 +82,7 @@ class Car extends \app\modules\admin\models\base\Car
         $timeFormat = 60 * 60 * 24;
 
         while ($yearNext <= $yearNow) {
-            for ($i = 2; $i <= 4; $i++) {
+            for ($i = 1; $i <= 4; $i++) {
                 $quarter = $this->getQuarterInterval($i, $yearNext);
 
                 $quarterStart = strtotime($quarter['start']->format('d.m.Y'));
