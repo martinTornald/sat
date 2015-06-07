@@ -158,21 +158,23 @@ AdminAsset::register($this);
                     $menuItems = [];
                 }
 
-//                echo SideNav::widget([
-//                    'type' => SideNav::TYPE_DEFAULT,
-//
-//                    'iconPrefix' => 'fa fa-',
-//                    'items' => \Yii::$app->getModule('admin')->getMenuItems(),
-//                ]);
+                echo '<div class="main-admin-menu">'. SideNav::widget([
+                    'type' => SideNav::TYPE_DEFAULT,
 
-                // sidebar menu: : style can be found in sidebar.less
-                echo Nav::widget(
-                    [
-                        'options' => ['class' => 'sidebar-menu'],
-                        'items' => \Yii::$app->getModule('admin')->getMenuItems(),
                         'encodeLabels' => false,
-                    ]
-                );
+
+                    'iconPrefix' => 'fa fa-',
+                    'items' => \Yii::$app->getModule('admin')->getMenuItems(),
+                ]) . '</div>';
+
+
+//                echo Nav::widget(
+//                    [
+//                        'options' => ['class' => 'sidebar-menu'],
+//                        'items' => \Yii::$app->getModule('admin')->getMenuItems(),
+//                        'encodeLabels' => false,
+//                    ]
+//                );
                 ?>
 
             </section>
