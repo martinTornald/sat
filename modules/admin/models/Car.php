@@ -30,10 +30,10 @@ class Car extends \app\modules\admin\models\base\Car
         $fullInaction = 0;
         $timeFormat = 60 * 60 * 24 ;
         foreach ($carInactions as $carInaction) {
-            $fullInaction += $carInaction->inactionTime / $timeFormat;
+            $fullInaction += $carInaction->inactionTime;
         }
 
-        return round($fullInaction/$timeFormat, 0);
+        return round($fullInaction, 0);
     }
 
     /**

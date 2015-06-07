@@ -90,17 +90,23 @@ class VoyageController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load($_POST) && $model->save()) {
+            if($model->status->id == 3) {
+                $model->income->fact = $model->cost->fact - $model->expense->fullExpense;
+            }
+
+//            $model->stat->statIncome->fact = $model->stat->statIncome->plan - $model->fullExpense;
+//            $model->stat->statIncome->save();
             // return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-                'customers'     => Customer::find()->all(),
-                'cars'          => Car::find()->all(),
-                'trailers'      => Trailer::find()->all(),
-                'drivers'       => Driver::find()->all(),
-                'statuses'      => Status::find()->all(),
-			]);
 		}
+
+        return $this->render('update', [
+            'model' => $model,
+            'customers'     => Customer::find()->all(),
+            'cars'          => Car::find()->all(),
+            'trailers'      => Trailer::find()->all(),
+            'drivers'       => Driver::find()->all(),
+            'statuses'      => Status::find()->all(),
+        ]);
 	}
 
 	/**

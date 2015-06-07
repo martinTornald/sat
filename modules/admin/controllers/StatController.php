@@ -131,12 +131,11 @@ class StatController extends Controller
 
 		if ($model->load($_POST) && $model->save()) {
             // return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-                'cars' => Car::find()->all(),
-			]);
 		}
+        return $this->render('update', [
+            'model' => $model,
+            'cars' => Car::find()->all(),
+        ]);
 	}
 
 	/**

@@ -131,12 +131,11 @@ class VoyageDistanceController extends Controller
 
 		if ($model->load($_POST) && $model->save()) {
             // return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-                'voyages' => Voyage::find()->all()
-			]);
 		}
+        return $this->render('update', [
+            'model' => $model,
+            'voyages' => Voyage::find()->all()
+        ]);
 	}
 
 	/**

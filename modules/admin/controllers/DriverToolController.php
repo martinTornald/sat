@@ -86,13 +86,12 @@ class DriverToolController extends Controller
 
 		if ($model->load($_POST) && $model->save()) {
             // return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-                'drivers' => Driver::find()->all(),
-                'tools' => Tool::find()->all(),
-			]);
 		}
+        return $this->render('update', [
+            'model' => $model,
+            'drivers' => Driver::find()->all(),
+            'tools' => Tool::find()->all(),
+        ]);
 	}
 
 	/**

@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\SparePart;
 use app\modules\admin\models\SparePartSearch;
+use app\modules\admin\models\Voyage;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -112,7 +113,10 @@ class SparePartController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', [
+            'model' => $model,
+            'voyages' => Voyage::find()->all()
+        ]);
 	}
 
 	/**
@@ -127,11 +131,11 @@ class SparePartController extends Controller
 
 		if ($model->load($_POST) && $model->save()) {
             return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
 		}
+        return $this->render('update', [
+            'model' => $model,
+            'voyages' => Voyage::find()->all()
+        ]);
 	}
 
 	/**

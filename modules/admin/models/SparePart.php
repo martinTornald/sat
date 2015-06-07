@@ -9,4 +9,11 @@ use Yii;
  */
 class SparePart extends \app\modules\admin\models\base\SparePart
 {
+    /**
+     * @return string
+     */
+    public function getIsPlan()
+    {
+        return $this->plan == 1 ? 'да' : 'нет';
+    }
 }

@@ -99,104 +99,98 @@ $this->title = 'Панель управления';
 
 </div>
 
+
 <div class="row">
-    <div class="col-sm-6">
-        <div class="box">
-            <?php
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => array_slice($cars, 0, 5)
-            ]);
+    <div class="col-md-3 col-xs-6">
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>
+                   &nbsp;
+                </h3>
 
-            ?>
+                <p>
+                    Простои
+                </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-car"></i>
+            </div>
+            <a href="<?= \yii\helpers\Url::to(['/admin/car']) ?>" class="small-box-footer">
+                Управлять <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'summary' => '',
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
 
-                    [
-                        'label' => 'Последние добавленные машины',
-                        'value' => 'fullName',
-                    ]
-                ],
-            ]); ?>
+    <div class="col-md-3 col-xs-6">
+
+        <div class="small-box  bg-green">
+            <div class="inner">
+                <h3>
+                    &nbsp;
+                </h3>
+                <p>
+                    Дальность перевозок
+                </p>
+            </div>
+            <div class="icon bg-">
+                <i class="fa fa-user"></i>
+            </div>
+            <a href="<?= \yii\helpers\Url::to(['/admin/customer']) ?>" class="small-box-footer">
+                Управлять <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>
+                    &nbsp;
+                </h3>
+                <p>
+                    Расходы
+                </p>
+            </div>
+            <div class="icon bg-">
+                <i class="fa fa-location-arrow"></i>
+            </div>
+            <a href="<?= \yii\helpers\Url::to(['/admin/driver']) ?>" class="small-box-footer">
+                Управлять <i class="fa fa-arrow-circle-right"></i>
+            </a>
         </div>
 
     </div>
 
-    <div class="col-sm-6">
-        <div class="box">
-            <?php
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => array_slice($drivers, 0, 5)
-            ]);
 
-            ?>
+    <div class="col-md-3 col-xs-6">
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'summary' => '',
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                    [
-                        'label' => 'Последние добавленные водители',
-                        'value' => 'fullName',
-                    ]
-                ],
-            ]); ?>
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>
+                    &nbsp;
+                </h3>
+                <p>
+                    Прибль
+                </p>
+            </div>
+            <div class="icon bg-">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <a href="<?= \yii\helpers\Url::to(['/admin/voyage']) ?>" class="small-box-footer">
+                Управлять <i class="fa fa-arrow-circle-right"></i>
+            </a>
         </div>
+
     </div>
 
-    <div class="col-sm-6">
-        <div class="box">
-            <?php
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => array_slice($customers, 0, 5)
-            ]);
+</div>
 
-            ?>
-
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'summary' => '',
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                    [
-                        'label' => 'Последние добавленные клиенты',
-                        'value' => 'fullName',
-                    ]
-                ],
-            ]); ?>
-        </div>
-    </div>
+<div class="row">
 
     <div class="col-sm-6">
-        <div class="box">
-            <?php
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => array_slice($voyages, 0, 5),
-            ]);
-
-            ?>
-
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'summary' => '',
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                    [
-                        'label' => 'Последние перевозки',
-                        'value' => 'name',
-                    ]
-                ],
-            ]); ?>
-        </div>
-    </div>
-    <div class="col-sm-6">
+        <h3>Последние погрузки</h3>
         <div class="box">
             <?php
             $dataProvider = new ArrayDataProvider([
@@ -225,6 +219,7 @@ $this->title = 'Панель управления';
         </div>
     </div>
     <div class="col-sm-6">
+        <h3>Последние разгрузки</h3>
         <div class="box">
             <?php
             $dataProvider = new ArrayDataProvider([
@@ -249,6 +244,59 @@ $this->title = 'Панель управления';
                         'value' => 'fact'
                     ]
                 ],
+            ]); ?>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <h3>Последние перевозки</h3>
+        <div class="box">
+            <?php
+
+            $gridColumns = [
+                [
+                    'attribute' => 'customer_id',
+                    'value' => 'customer.company'
+                ],
+                [
+                    'attribute' => 'car_id',
+                    'value' => 'car.fullName'
+                ],
+                [
+                    'attribute' => 'trailer_id',
+                    'value' => 'trailer.fullName'
+                ],
+                [
+                    'attribute' => 'driver_id',
+                    'value' => 'driver.surname'
+                ],
+                [
+                    'attribute' => 'status_id',
+                    'value' => 'status.description'
+                ],
+                'name',
+
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'urlCreator' => function ($action, $model, $key, $index) {
+                        // using the column name as key, not mapping to 'id' like the standard generator
+                        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string)$key];
+                        $params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
+                        return \yii\helpers\Url::toRoute($params);
+                    },
+                    'contentOptions' => ['nowrap' => 'nowrap']
+                ],
+            ];
+
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => array_slice($voyages, 0, 5),
+            ]);
+            ?>
+
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'summary' => '',
+                'columns' => $gridColumns
             ]); ?>
         </div>
     </div>

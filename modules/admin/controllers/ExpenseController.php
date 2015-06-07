@@ -127,12 +127,11 @@ class ExpenseController extends Controller
 		$model = $this->findModel($voyage_id);
 
 		if ($model->load($_POST) && $model->save()) {
-            return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
+            //return $this->redirect(Url::previous());
 		}
+        return $this->render('update', [
+            'model' => $model,
+        ]);
 	}
 
 	/**

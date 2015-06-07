@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
+use yii\helpers\ArrayHelper;
+use dosamigos\datepicker\DatePicker;
 
 /**
 * @var yii\web\View $this
@@ -27,12 +29,25 @@ use \dmstr\bootstrap\Tabs;
         <?php $this->beginBlock('main'); ?>
 
         <p>
-            
-			<?= $form->field($model, 'voyage_id')->textInput() ?>
-			<?= $form->field($model, 'plan')->textInput() ?>
+
+            <?= $form->field($model, 'voyage_id')->dropDownList(
+                ArrayHelper::map($voyages, 'id', 'fullName')
+            ) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+			<?= $form->field($model, 'plan')->checkbox() ?>
 			<?= $form->field($model, 'price')->textInput() ?>
-			<?= $form->field($model, 'date')->textInput() ?>
-			<?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+            <?= $form->field($model, 'date')->widget(
+                DatePicker::className(), [
+                'language' => 'ru',
+                'inline' => false,
+                // modify template for custom rendering
+                //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]);?>
+
         </p>
         <?php $this->endBlock(); ?>
         

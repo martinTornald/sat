@@ -99,11 +99,10 @@ class DriverController extends Controller
 
 		if ($model->load($_POST) && $model->save()) {
             // return $this->redirect(Url::previous());
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
 		}
+        return $this->render('update', [
+            'model' => $model,
+        ]);
 	}
 
 	/**

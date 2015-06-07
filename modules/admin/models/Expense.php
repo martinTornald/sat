@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\models;
 
+use app\modules\admin\models\base\VoyageSparePart;
 use Yii;
 
 /**
@@ -28,5 +29,10 @@ class Expense extends \app\modules\admin\models\base\Expense
         }
     }
 
+    public function  getFullExpense() {
+        //$spareParts = VoyageSparePart::findByVoyageId($this->voyage->id)->all();
+        //var_dump($spareParts);
+        return 0;
+    }
 
 }

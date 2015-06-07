@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'fullName'
             ],
             [
-                'attribute' => 'Inaction days',
+                'label' => 'Простои в днях',
                 'value' => 'fullInaction'
             ],
         ],
