@@ -12,6 +12,20 @@ use yii\db\BaseActiveRecord;
  */
 class Voyage extends \app\modules\admin\models\base\Voyage
 {
+
+    /**
+     * @return string
+     */
+    public function getFullDistance()
+    {
+        $voyageDistances = $this->voyageDistances;
+        $fullDistance = 0;
+        foreach($voyageDistances as $voyageDistance) {
+            $fullDistance += $voyageDistance->distance;
+        }
+        return $fullDistance;
+    }
+
     /**
      * @return string
      */
@@ -20,6 +34,22 @@ class Voyage extends \app\modules\admin\models\base\Voyage
         return $this->name . ' (' . $this->id . ')';
     }
 
+    public function getPriceCostDriver() {
+        $priceCostDriver = 0;
+        switch($this->car_id) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                $priceCostDriver = 3500;
+                break;
+            case 4:
+            case 5:
+                $priceCostDriver = 4000;
+                break;
+        }
+        return $priceCostDriver;
+    }
 
     public function behaviors()
     {
@@ -138,4 +168,35 @@ class Voyage extends \app\modules\admin\models\base\Voyage
         }
         return $data;
     }
+
+    public function getCostSparePartAll() {
+        $voyageSpareParts = $this->voyageSpareParts;
+        $costSparePartAll = 0;
+        foreach($voyageSpareParts as $voyageSparePart) {
+            $costSparePartAll += $voyageSparePart->sparePart->price;
+        }
+        return $costSparePartAll;
+    }
+
+    public function updateDistance() {
+        $this->distance->fact = $this->fullDistance;
+        $this->distance->save();
+        $this->costDriver->costs = $this->distance->fact / 100 * $this->priceCostDriver;
+        $this->costDriver->save();
+        $this->updateIncome();
+    }
+
+    public function updateIncome() {
+
+        if(empty($this->cost->fact)) {
+
+            $costPlan = 0;
+        } else {
+            $costPlan = $this->cost->fact;
+        }
+
+        $this->income->fact = $costPlan - $this->expense->fullExpense  - $this->costDriver->costs;
+        $this->income->save();
+    }
+
 }

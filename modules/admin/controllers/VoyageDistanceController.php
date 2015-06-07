@@ -105,6 +105,7 @@ class VoyageDistanceController extends Controller
 
 		try {
             if ($model->load($_POST) && $model->save()) {
+                $model->voyage->updateDistance();
                 return $this->redirect(Url::previous());
             } elseif (!\Yii::$app->request->isPost) {
                 $model->load($_GET);
@@ -130,6 +131,7 @@ class VoyageDistanceController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load($_POST) && $model->save()) {
+            $model->voyage->updateDistance();
             // return $this->redirect(Url::previous());
 		}
         return $this->render('update', [

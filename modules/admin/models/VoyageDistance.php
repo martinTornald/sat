@@ -17,4 +17,5 @@ class VoyageDistance extends \app\modules\admin\models\base\VoyageDistance
         return $this->is_tent == 1 ? 'да' : 'нет';
     }
 
+
 }

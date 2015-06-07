@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\Expense;
 use app\modules\admin\models\ExpenseSearch;
+use app\modules\admin\models\Voyage;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -113,7 +114,10 @@ class ExpenseController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', [
+            'model' => $model,
+            'voyages' => Voyage::find()->all()
+        ]);
 	}
 
 	/**
@@ -127,10 +131,12 @@ class ExpenseController extends Controller
 		$model = $this->findModel($voyage_id);
 
 		if ($model->load($_POST) && $model->save()) {
+            $model->voyage->updateIncome();
             //return $this->redirect(Url::previous());
 		}
         return $this->render('update', [
             'model' => $model,
+            'voyages' => Voyage::find()->all()
         ]);
 	}
 

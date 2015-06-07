@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="clearfix">
         <p class="pull-left">
             <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Добавить', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Обновить информацию', ['income-update'], ['class' => 'btn btn-success']) ?>
         </p>
+
 
         <div class="pull-right">
 
@@ -130,6 +132,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
     $gridColumns = [
         [
+            'label' => 'Номер перевозки',
+            'attribute' => 'id',
+            'value' => 'id'
+        ],
+        [
+            'label' => 'Название перевозки',
+            'attribute' => 'name',
+            'value' => 'fullName'
+        ],
+        [
             'attribute' => 'customer_id',
             'value' => 'customer.company'
         ],
@@ -149,8 +161,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'status_id',
             'value' => 'status.description'
         ],
-        'name',
-
         [
             'class' => 'yii\grid\ActionColumn',
             'urlCreator' => function ($action, $model, $key, $index) {

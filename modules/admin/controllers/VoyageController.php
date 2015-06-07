@@ -21,6 +21,15 @@ use yii\helpers\Url;
  */
 class VoyageController extends Controller
 {
+    public function actionIncomeUpdate()
+    {
+        $voyages = Voyage::find()->all();
+        foreach($voyages as $voyage) {
+            $voyage->updateIncome();
+        }
+        return $this->redirect(Url::to('index'));
+    }
+
 	/**
 	 * Lists all Voyage models.
 	 * @return mixed
@@ -91,11 +100,8 @@ class VoyageController extends Controller
 
 		if ($model->load($_POST) && $model->save()) {
             if($model->status->id == 3) {
-                $model->income->fact = $model->cost->fact - $model->expense->fullExpense;
+                $model->updateIncome();
             }
-
-//            $model->stat->statIncome->fact = $model->stat->statIncome->plan - $model->fullExpense;
-//            $model->stat->statIncome->save();
             // return $this->redirect(Url::previous());
 		}
 

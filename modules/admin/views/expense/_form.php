@@ -3,23 +3,24 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
+use yii\helpers\ArrayHelper;
 
 /**
-* @var yii\web\View $this
-* @var app\modules\admin\models\Expense $model
-* @var yii\widgets\ActiveForm $form
-*/
+ * @var yii\web\View $this
+ * @var app\modules\admin\models\Expense $model
+ * @var yii\widgets\ActiveForm $form
+ */
 
 ?>
 
 <div class="expense-form">
 
     <?php $form = ActiveForm::begin([
-                        'id'     => 'Expense',
-                        'layout' => 'horizontal',
-                        'enableClientValidation' => false,
-                    ]
-                );
+            'id' => 'Expense',
+            'layout' => 'horizontal',
+            'enableClientValidation' => false,
+        ]
+    );
     ?>
 
     <div class="">
@@ -27,35 +28,37 @@ use \dmstr\bootstrap\Tabs;
         <?php $this->beginBlock('main'); ?>
 
         <p>
-            
-			<?= $form->field($model, 'voyage_id')->textInput() ?>
-			<?= $form->field($model, 'fuel')->textInput() ?>
-			<?= $form->field($model, 'repair')->textInput() ?>
+
+            <?= $form->field($model, 'voyage_id')->dropDownList(
+                ArrayHelper::map($voyages, 'id', 'fullName')
+            ) ?>
+            <?= $form->field($model, 'fuel')->textInput() ?>
+            <?= $form->field($model, 'repair')->textInput() ?>
         </p>
         <?php $this->endBlock(); ?>
-        
+
         <?=
-    Tabs::widget(
-                 [
-                   'encodeLabels' => false,
-                     'items' => [ [
-    'label'   => 'Expense',
-    'content' => $this->blocks['main'],
-    'active'  => true,
-], ]
-                 ]
-    );
-    ?>
+        Tabs::widget(
+            [
+                'encodeLabels' => false,
+                'items' => [[
+                    'label' => 'Expense',
+                    'content' => $this->blocks['main'],
+                    'active' => true,
+                ],]
+            ]
+        );
+        ?>
         <hr/>
 
         <?= Html::submitButton(
-                '<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord
-                            ? 'Create' : 'Save'),
-                [
-                    'id'    => 'save-' . $model->formName(),
-                    'class' => 'btn btn-success'
-                ]
-            );
+            '<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord
+                ? 'Create' : 'Save'),
+            [
+                'id' => 'save-' . $model->formName(),
+                'class' => 'btn btn-success'
+            ]
+        );
         ?>
 
 

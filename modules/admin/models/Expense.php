@@ -30,9 +30,7 @@ class Expense extends \app\modules\admin\models\base\Expense
     }
 
     public function  getFullExpense() {
-        //$spareParts = VoyageSparePart::findByVoyageId($this->voyage->id)->all();
-        //var_dump($spareParts);
-        return 0;
+        return $this->voyage->costSparePartAll + $this->fuel + $this->repair;
     }
 
 }
