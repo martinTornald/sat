@@ -44,6 +44,10 @@ class CarController extends Controller
      */
     public function actionIndex()
     {
+        $countViewItems = \Yii::$app->getRequest()->getQueryParam('count');
+        if (empty($countViewItems)) {
+            $countViewItems = 20;
+        }
         $searchModel = new CarSearch;
         $dataProvider = $searchModel->search($_GET);
 
@@ -51,6 +55,7 @@ class CarController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'countViewItems' => $countViewItems
         ]);
     }
 
@@ -166,7 +171,8 @@ class CarController extends Controller
     /**
      * Задает простои машин
      */
-    public function updateInaction() {
+    public function updateInaction()
+    {
         $cars = Car::find()->all();
         $voyage_prev = null;
         $voyage_next = null;
@@ -183,7 +189,7 @@ class CarController extends Controller
                     }
                 }
                 $voyage_prev = $voyages[$skey];
-                array_splice ($voyages,$skey,1);
+                array_splice($voyages, $skey, 1);
                 $skey = 0;
             }
             while (count($voyages) > 0) {
@@ -195,18 +201,18 @@ class CarController extends Controller
                 }
 
                 $voyage_next = $voyages[$skey];
-                array_splice ($voyages,$skey,1);
-                if(strtotime($voyage_prev->unloading->fact) < strtotime($voyage_next->loading->fact)) {
+                array_splice($voyages, $skey, 1);
+                if (strtotime($voyage_prev->unloading->fact) < strtotime($voyage_next->loading->fact)) {
 
                     $isInaction = false;
                     foreach ($inactions as $inaction) {
-                        if($inaction->voyage_prev == $voyage_prev->id && $inaction->voyage_next == $voyage_next->id) {
+                        if ($inaction->voyage_prev == $voyage_prev->id && $inaction->voyage_next == $voyage_next->id) {
                             $isInaction = true;
                             break;
                         }
                     }
 
-                    if(!$isInaction) {
+                    if (!$isInaction) {
                         $carInaction = new CarInaction();
                         $carInaction->car_id = $car->id;
                         $carInaction->voyage_prev = $voyage_prev->id;
@@ -219,14 +225,15 @@ class CarController extends Controller
                 }
 
 
-
             }
         }
     }
+
     /**
      * Задает простои машин
      */
-    public function setInaction() {
+    public function setInaction()
+    {
         $cars = Car::find()->all();
         $voyage_prev = null;
         $voyage_next = null;
@@ -242,7 +249,7 @@ class CarController extends Controller
                     }
                 }
                 $voyage_prev = $voyages[$skey];
-                array_splice ($voyages,$skey,1);
+                array_splice($voyages, $skey, 1);
                 $skey = 0;
             }
             while (count($voyages) > 0) {
@@ -254,8 +261,8 @@ class CarController extends Controller
                 }
 
                 $voyage_next = $voyages[$skey];
-                array_splice ($voyages,$skey,1);
-                if(strtotime($voyage_prev->unloading->fact) < strtotime($voyage_next->loading->fact)) {
+                array_splice($voyages, $skey, 1);
+                if (strtotime($voyage_prev->unloading->fact) < strtotime($voyage_next->loading->fact)) {
                     $carInaction = new CarInaction();
                     $carInaction->car_id = $car->id;
                     $carInaction->voyage_prev = $voyage_prev->id;
@@ -266,18 +273,18 @@ class CarController extends Controller
                 }
 
 
-
             }
         }
     }
 
-    public function getInaction() {
+    public function getInaction()
+    {
         $fileStat = fopen('statistics/stat.csv', 'w');
         $cars = Car::find()->all();
         foreach ($cars as $car) {
             $quarterInactions = $car->quarterInaction;
             foreach ($quarterInactions as $quarterInaction) {
-                fputcsv($fileStat, array($car->id,$quarterInaction['start'],$quarterInaction['end'],$quarterInaction['count']));
+                fputcsv($fileStat, array($car->id, $quarterInaction['start'], $quarterInaction['end'], $quarterInaction['count']));
             }
         }
         fclose($fileStat);

@@ -49,7 +49,6 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
                 'format' => 'raw',
                 'value' => Html::a($model->owner->fullName, ['/admin/owner/view', 'id' => $model->owner->id]),
             ],
-
             'make_model',
             'number',
             'color',
@@ -82,37 +81,50 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
 
     ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            [
+    <?php
+    $gridColumns = [
+        ['class' => 'yii\grid\SerialColumn'],
+        'name',
+        [
 
-                'class' => \yii\grid\ActionColumn::className(),
-                'controller' => 'voyage',
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    return [$action, 'id' => $model->id,];
+            'class' => \yii\grid\ActionColumn::className(),
+            'controller' => 'voyage',
+            'urlCreator' => function ($action, $model, $key, $index) {
+                return [$action, 'id' => $model->id,];
+            },
+            'buttons' => [
+                'view' => function ($url, $model) {
+                    $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/view', 'id' => $model->id]);
+
+                    return \yii\helpers\Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $customurl);
+
                 },
-                'buttons' => [
-                    'view' => function ($url, $model) {
-                        $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/view', 'id' => $model->id]);
+                'edit' => function ($url, $model) {
+                    $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit', 'id' => $model->id]);
+                    return \yii\helpers\Html::a('<span class="glyphicon glyphicon-pencil"></span>', $customurl);
+                },
+                'delete' => function ($url, $model) {
+                    $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete', 'id' => $model->id]);
+                    return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl);
+                }
 
-                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $customurl);
-
-                    },
-                    'edit' => function ($url, $model) {
-                        $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/edit', 'id' => $model->id]);
-                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-pencil"></span>', $customurl);
-                    },
-                    'delete' => function ($url, $model) {
-                        $customurl = Yii::$app->getUrlManager()->createUrl(['admin/voyage/delete', 'id' => $model->id]);
-                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl);
-                    }
-
-                ],
             ],
         ],
+    ];
+
+    echo "<hr>\n". ExportMenu::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => $gridColumns,
+            'fontAwesome' => true,
+            'dropdownOptions' => [
+                'label' => 'Экспортировать',
+                'class' => 'btn btn-default'
+            ]
+        ]) . "<hr>\n";
+
+    echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $gridColumns
     ]); ?>
 
     <p class='pull-right'>
@@ -139,31 +151,43 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     ]);
     ?>
 
-    <?= GridView::widget([
+    <?php
+    $gridColumns = [
+        ['class' => 'yii\grid\SerialColumn'],
+        [
+            'label' => 'Начало простоя',
+            'attribute' => 'voyagePrev.id',
+            'value' => 'voyagePrev.unloading.fact'
+        ],
+        [
+            'label' => 'Окончание простоя',
+            'attribute' => 'voyageNext.id',
+            'value' => 'voyageNext.loading.fact'
+        ],
+        [
+            'label' => 'Простой в днях',
+            'value' => 'inactionTime',
+        ],
+    ];
+
+    echo "<hr>\n". ExportMenu::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => $gridColumns,
+            'fontAwesome' => true,
+            'dropdownOptions' => [
+                'label' => 'Экспортировать',
+                'class' => 'btn btn-default'
+            ]
+        ]) . "<hr>\n";
+
+    echo GridView::widget([
         'layout' => '{summary}{pager}{items}{pager}',
         'pager' => [
             'class' => yii\widgets\LinkPager::className(),
             'firstPageLabel' => 'Первая',
             'lastPageLabel' => 'Последняя'],
         'dataProvider' => $dataProvider,
-        'columns' => [
-
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'label' => 'Начало простоя',
-                'attribute' => 'voyagePrev.id',
-                'value' => 'voyagePrev.unloading.fact'
-            ],
-            [
-                'label' => 'Окончание простоя',
-                'attribute' => 'voyageNext.id',
-                'value' => 'voyageNext.loading.fact'
-            ],
-            [
-                'label' => 'Простой в днях',
-                'value' => 'inactionTime',
-            ],
-        ],
+        'columns' => $gridColumns
     ]); ?>
 
     <p class='pull-right'>
@@ -201,20 +225,22 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     ]);
     ?>
 
-    <?php echo GridView::widget([
+    <?php
+    echo "<hr>\n". ExportMenu::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => $gridColumns,
+            'fontAwesome' => true,
+            'dropdownOptions' => [
+                'label' => 'Экспортировать',
+                'class' => 'btn btn-default'
+            ]
+        ]) . "<hr>\n";
+
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => $gridColumns
     ]);
 
-    echo ExportMenu::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => $gridColumns,
-        'fontAwesome' => true,
-        'dropdownOptions' => [
-            'label' => 'Экспортировать',
-            'class' => 'btn btn-default'
-        ]
-    ]);
     ?>
 
     <p class='pull-right'>

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use kartik\export\ExportMenu;
 
 /**
  * @var yii\web\View $this
@@ -48,12 +49,49 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]],
                 ]
             );
-            ?>        </div>
+            ?>
+        </div>
     </div>
 
 
     <div class="table-responsive">
-        <?= GridView::widget([
+        <?php
+
+        $gridColumns = [
+            [
+                'label' => 'Дата',
+                'attribute' => 'stat_id',
+                'value' => 'stat.date'
+            ],
+            [
+                'attribute' => 'stat_id',
+                'value' => 'stat.car.fullName'
+            ],
+            'plan',
+            'fact',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    // using the column name as key, not mapping to 'id' like the standard generator
+                    $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string)$key];
+                    $params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
+                    return Url::toRoute($params);
+                },
+                'contentOptions' => ['nowrap' => 'nowrap']
+            ],
+        ];
+
+        echo "<hr>\n" . ExportMenu::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => $gridColumns,
+                'fontAwesome' => true,
+                'dropdownOptions' => [
+                    'label' => 'Экспортировать',
+                    'class' => 'btn btn-default'
+                ]
+            ]) . "<hr>\n";
+
+        echo GridView::widget([
             'layout' => '{summary}{pager}{items}{pager}',
             'dataProvider' => $dataProvider,
             'pager' => [
@@ -61,29 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'firstPageLabel' => 'First',
                 'lastPageLabel' => 'Last'],
             'filterModel' => $searchModel,
-            'columns' => [
-                [
-                    'label' => 'Дата',
-                    'attribute' => 'stat_id',
-                    'value' => 'stat.date'
-                ],
-                [
-                    'attribute' => 'stat_id',
-                    'value' => 'stat.car.fullName'
-                ],
-                'plan',
-                'fact',
-                [
-                    'class' => 'yii\grid\ActionColumn',
-                    'urlCreator' => function ($action, $model, $key, $index) {
-                        // using the column name as key, not mapping to 'id' like the standard generator
-                        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string)$key];
-                        $params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
-                        return Url::toRoute($params);
-                    },
-                    'contentOptions' => ['nowrap' => 'nowrap']
-                ],
-            ],
+            'columns' => $gridColumns
         ]); ?>
     </div>
 

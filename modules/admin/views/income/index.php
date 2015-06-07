@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentOptions' => ['nowrap' => 'nowrap']
         ],
     ];
-    echo ExportMenu::widget([
+    echo  "<hr>\n" . ExportMenu::widget([
             'dataProvider' => $dataProvider,
             'columns' => $gridColumns,
             'fontAwesome' => true,
@@ -76,7 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Экспортировать',
                 'class' => 'btn btn-default'
             ]
-        ]) . "<hr>\n". GridView::widget([
+        ]) . "<hr>\n";
+    echo GridView::widget([
             'layout' => '{summary}{pager}{items}{pager}',
             'pager' => [
                 'class' => yii\widgets\LinkPager::className(),
