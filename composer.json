@@ -48,7 +48,8 @@
     "kartik-v/yii2-grid": "*",
     "kartik-v/yii2-mpdf": "dev-master",
     "kartik-v/yii2-checkbox-x": "dev-master",
-    "kartik-v/yii2-widget-sidenav": "*"
+    "kartik-v/yii2-widget-sidenav": "*",
+    "phpoffice/phpexcel": "1.8.0"
   },
   "require-dev": {
     "yiisoft/yii2-apidoc": "2.*",
