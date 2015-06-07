@@ -73,7 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'Name',
+                'label' => 'Название машины',
+                'attribute' => 'id',
                 'value' => 'fullName'
             ],
             [

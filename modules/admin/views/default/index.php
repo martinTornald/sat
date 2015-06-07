@@ -115,7 +115,7 @@ $this->title = 'Панель управления';
             <div class="icon">
                 <i class="fa fa-car"></i>
             </div>
-            <a href="<?= \yii\helpers\Url::to(['/admin/car']) ?>" class="small-box-footer">
+            <a href="<?= \yii\helpers\Url::to(['/admin/car/inaction']) ?>" class="small-box-footer">
                 Управлять <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -136,7 +136,7 @@ $this->title = 'Панель управления';
             <div class="icon bg-">
                 <i class="fa fa-user"></i>
             </div>
-            <a href="<?= \yii\helpers\Url::to(['/admin/customer']) ?>" class="small-box-footer">
+            <a href="<?= \yii\helpers\Url::to(['/admin/voyage-distance']) ?>" class="small-box-footer">
                 Управлять <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -156,7 +156,7 @@ $this->title = 'Панель управления';
             <div class="icon bg-">
                 <i class="fa fa-location-arrow"></i>
             </div>
-            <a href="<?= \yii\helpers\Url::to(['/admin/driver']) ?>" class="small-box-footer">
+            <a href="<?= \yii\helpers\Url::to(['/admin/stat-expense']) ?>" class="small-box-footer">
                 Управлять <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -178,7 +178,7 @@ $this->title = 'Панель управления';
             <div class="icon bg-">
                 <i class="fa fa-share-alt"></i>
             </div>
-            <a href="<?= \yii\helpers\Url::to(['/admin/voyage']) ?>" class="small-box-footer">
+            <a href="<?= \yii\helpers\Url::to(['/admin/stat-income']) ?>" class="small-box-footer">
                 Управлять <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>

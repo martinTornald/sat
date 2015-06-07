@@ -64,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'stat.date'
             ],
             [
+                'label' => 'Машина',
                 'attribute' => 'stat_id',
                 'value' => 'stat.car.fullName'
             ],
