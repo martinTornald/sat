@@ -21,7 +21,7 @@ class IncomeController extends Controller
 	 */
 	public function actionIndex()
 	{
-        //$this->setIncome();
+
 		$searchModel = new IncomeSearch;
 		$dataProvider = $searchModel->search($_GET);
 

@@ -5,12 +5,12 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\SparePart;
+use app\modules\admin\models\VoyageSparePart;
 
 /**
-* SparePartSearch represents the model behind the search form about `app\modules\admin\models\SparePart`.
+* VoyageSparePartSearch represents the model behind the search form about `app\modules\admin\models\VoyageSparePart`.
 */
-class SparePartSearch extends SparePart
+class VoyageSparePartSearch extends VoyageSparePart
 {
 /**
 * @inheritdoc
@@ -18,9 +18,7 @@ class SparePartSearch extends SparePart
 public function rules()
 {
 return [
-[['id', 'voyage_id', 'plan'], 'integer'],
-            [['name', 'date'], 'safe'],
-            [['price'], 'number'],
+[['id', 'voyage_id', 'spare_part_id'], 'integer'],
 ];
 }
 
@@ -42,7 +40,7 @@ return Model::scenarios();
 */
 public function search($params)
 {
-$query = SparePart::find();
+$query = VoyageSparePart::find();
 
 $dataProvider = new ActiveDataProvider([
 'query' => $query,
@@ -59,12 +57,8 @@ return $dataProvider;
 $query->andFilterWhere([
             'id' => $this->id,
             'voyage_id' => $this->voyage_id,
-            'plan' => $this->plan,
-            'price' => $this->price,
-            'date' => $this->date,
+            'spare_part_id' => $this->spare_part_id,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
 
 return $dataProvider;
 }

@@ -4,14 +4,14 @@ use yii\helpers\Html;
 
 /**
 * @var yii\web\View $this
-* @var app\modules\admin\models\SparePart $model
+* @var app\modules\admin\models\VoyageSparePart $model
 */
 
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'Spare Parts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Voyage Spare Parts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="spare-part-create">
+<div class="voyage-spare-part-create">
 
     <p class="pull-left">
         <?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>

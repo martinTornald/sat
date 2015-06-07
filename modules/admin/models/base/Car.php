@@ -19,10 +19,11 @@ use Yii;
  * @property string $photo
  * @property double $cost
  *
- * @property Owner $owner
- * @property CarInaction[] $carInactions
- * @property Insurance $insurance
- * @property Voyage[] $voyages
+ * @property \app\modules\admin\models\Owner $owner
+ * @property \app\modules\admin\models\CarInaction[] $carInactions
+ * @property \app\modules\admin\models\Insurance $insurance
+ * @property \app\modules\admin\models\Stat[] $stats
+ * @property \app\modules\admin\models\Voyage[] $voyages
  */
 class Car extends \yii\db\ActiveRecord
 {
@@ -54,17 +55,17 @@ class Car extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'owner_id' => Yii::t('app', 'Владельц'),
-            'make_model' => Yii::t('app', 'Модель'),
-            'number' => Yii::t('app', 'Номер'),
-            'color' => Yii::t('app', 'Цвет'),
-            'year' => Yii::t('app', 'Год выпуска'),
-            'reg_number' => Yii::t('app', 'Регистрационный номер'),
-            'reg_certificate' => Yii::t('app', 'Регистрационный сертификат'),
-            'mileage' => Yii::t('app', 'Пробег'),
-            'photo' => Yii::t('app', 'Фото'),
-            'cost' => Yii::t('app', 'Стоимость'),
+            'id' => 'ID',
+            'owner_id' => 'Владельц',
+            'make_model' => 'Модель',
+            'number' => 'Номер',
+            'color' => 'Цвет',
+            'year' => 'Год выпуска',
+            'reg_number' => 'Регистрационный номер',
+            'reg_certificate' => 'Регистрационный сертификат',
+            'mileage' => 'Пробег',
+            'photo' => 'Фото',
+            'cost' => 'Стоимость',
         ];
     }
 
@@ -90,6 +91,14 @@ class Car extends \yii\db\ActiveRecord
     public function getInsurance()
     {
         return $this->hasOne(\app\modules\admin\models\Insurance::className(), ['car_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStats()
+    {
+        return $this->hasMany(\app\modules\admin\models\Stat::className(), ['car_id' => 'id']);
     }
 
     /**

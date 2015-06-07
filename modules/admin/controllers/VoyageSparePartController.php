@@ -2,8 +2,8 @@
 
 namespace app\modules\admin\controllers;
 
-use app\modules\admin\models\SparePart;
-use app\modules\admin\models\SparePartSearch;
+use app\modules\admin\models\VoyageSparePart;
+use app\modules\admin\models\VoyageSparePartSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use yii\helpers\Url;
 use dmstr\bootstrap\Tabs;
 
 /**
- * SparePartController implements the CRUD actions for SparePart model.
+ * VoyageSparePartController implements the CRUD actions for VoyageSparePart model.
  */
-class SparePartController extends Controller
+class VoyageSparePartController extends Controller
 {
     /**
      * @var boolean whether to enable CSRF validation for the actions in this controller.
@@ -54,12 +54,12 @@ class SparePartController extends Controller
     }
 
 	/**
-	 * Lists all SparePart models.
+	 * Lists all VoyageSparePart models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		$searchModel  = new SparePartSearch;
+		$searchModel  = new VoyageSparePartSearch;
 		$dataProvider = $searchModel->search($_GET);
 
 		Tabs::clearLocalStorage();
@@ -74,7 +74,7 @@ class SparePartController extends Controller
 	}
 
 	/**
-	 * Displays a single SparePart model.
+	 * Displays a single VoyageSparePart model.
 	 * @param integer $id
      *
 	 * @return mixed
@@ -94,13 +94,13 @@ class SparePartController extends Controller
 	}
 
 	/**
-	 * Creates a new SparePart model.
+	 * Creates a new VoyageSparePart model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		$model = new SparePart;
+		$model = new VoyageSparePart;
 
 		try {
             if ($model->load($_POST) && $model->save()) {
@@ -116,7 +116,7 @@ class SparePartController extends Controller
 	}
 
 	/**
-	 * Updates an existing SparePart model.
+	 * Updates an existing VoyageSparePart model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -135,7 +135,7 @@ class SparePartController extends Controller
 	}
 
 	/**
-	 * Deletes an existing SparePart model.
+	 * Deletes an existing VoyageSparePart model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -166,15 +166,15 @@ class SparePartController extends Controller
 	}
 
 	/**
-	 * Finds the SparePart model based on its primary key value.
+	 * Finds the VoyageSparePart model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return SparePart the loaded model
+	 * @return VoyageSparePart the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = SparePart::findOne($id)) !== null) {
+		if (($model = VoyageSparePart::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');

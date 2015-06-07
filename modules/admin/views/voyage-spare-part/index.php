@@ -7,21 +7,21 @@ use yii\grid\GridView;
 /**
 * @var yii\web\View $this
 * @var yii\data\ActiveDataProvider $dataProvider
-* @var app\modules\admin\models\SparePartSearch $searchModel
+* @var app\modules\admin\models\VoyageSparePartSearch $searchModel
 */
 
-    $this->title = 'Spare Parts';
+    $this->title = 'Voyage Spare Parts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="spare-part-index">
+<div class="voyage-spare-part-index">
 
     <?php //     echo $this->render('_search', ['model' =>$searchModel]);
     ?>
 
     <div class="clearfix">
         <p class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New' . ' Spare Part', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New' . ' Voyage Spare Part', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <div class="pull-right">
@@ -41,15 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         'encodeLabels' => false,
                         'items'        => [
     [
-        'label' => '<i class="glyphicon glyphicon-arrow-left"> Voyage</i>',
+        'label' => '<i class="glyphicon glyphicon-arrow-left"> Spare Part</i>',
         'url' => [
-            'voyage/index',
+            'spare-part/index',
         ],
     ],
     [
-        'label' => '<i class="glyphicon glyphicon-arrow-right"> Voyage Spare Part</i>',
+        'label' => '<i class="glyphicon glyphicon-arrow-left"> Voyage</i>',
         'url' => [
-            'voyage-spare-part/index',
+            'voyage/index',
         ],
     ],
 ]                    ],
@@ -82,10 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ],
 			'id',
 			'voyage_id',
-			'name',
-			'plan',
-			'price',
-			'date',
+			'spare_part_id',
         ],
     ]); ?>
         </div>

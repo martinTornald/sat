@@ -22,9 +22,11 @@ use Yii;
  * @property \app\modules\admin\models\Cost $cost
  * @property \app\modules\admin\models\CostDriver $costDriver
  * @property \app\modules\admin\models\Distance $distance
+ * @property \app\modules\admin\models\Expense $expense
  * @property \app\modules\admin\models\Income $income
  * @property \app\modules\admin\models\Loading $loading
  * @property \app\modules\admin\models\Rate $rate
+ * @property \app\modules\admin\models\SparePart[] $spareParts
  * @property \app\modules\admin\models\Unloading $unloading
  * @property \app\modules\admin\models\Car $car
  * @property \app\modules\admin\models\Customer $customer
@@ -32,6 +34,7 @@ use Yii;
  * @property \app\modules\admin\models\Status $status
  * @property \app\modules\admin\models\Trailer $trailer
  * @property \app\modules\admin\models\VoyageDistance[] $voyageDistances
+ * @property \app\modules\admin\models\VoyageSparePart[] $voyageSpareParts
  */
 class Voyage extends \yii\db\ActiveRecord
 {
@@ -110,6 +113,14 @@ class Voyage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getExpense()
+    {
+        return $this->hasOne(\app\modules\admin\models\Expense::className(), ['voyage_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getIncome()
     {
         return $this->hasOne(\app\modules\admin\models\Income::className(), ['voyage_id' => 'id']);
@@ -129,6 +140,14 @@ class Voyage extends \yii\db\ActiveRecord
     public function getRate()
     {
         return $this->hasOne(\app\modules\admin\models\Rate::className(), ['voyage_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSpareParts()
+    {
+        return $this->hasMany(\app\modules\admin\models\SparePart::className(), ['voyage_id' => 'id']);
     }
 
     /**
@@ -185,5 +204,13 @@ class Voyage extends \yii\db\ActiveRecord
     public function getVoyageDistances()
     {
         return $this->hasMany(\app\modules\admin\models\VoyageDistance::className(), ['voyage_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVoyageSpareParts()
+    {
+        return $this->hasMany(\app\modules\admin\models\VoyageSparePart::className(), ['voyage_id' => 'id']);
     }
 }

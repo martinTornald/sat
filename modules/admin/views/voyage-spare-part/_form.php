@@ -6,16 +6,16 @@ use \dmstr\bootstrap\Tabs;
 
 /**
 * @var yii\web\View $this
-* @var app\modules\admin\models\SparePart $model
+* @var app\modules\admin\models\VoyageSparePart $model
 * @var yii\widgets\ActiveForm $form
 */
 
 ?>
 
-<div class="spare-part-form">
+<div class="voyage-spare-part-form">
 
     <?php $form = ActiveForm::begin([
-                        'id'     => 'SparePart',
+                        'id'     => 'VoyageSparePart',
                         'layout' => 'horizontal',
                         'enableClientValidation' => false,
                     ]
@@ -28,11 +28,9 @@ use \dmstr\bootstrap\Tabs;
 
         <p>
             
+			<?= $form->field($model, 'id')->textInput() ?>
 			<?= $form->field($model, 'voyage_id')->textInput() ?>
-			<?= $form->field($model, 'plan')->textInput() ?>
-			<?= $form->field($model, 'price')->textInput() ?>
-			<?= $form->field($model, 'date')->textInput() ?>
-			<?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+			<?= $form->field($model, 'spare_part_id')->textInput() ?>
         </p>
         <?php $this->endBlock(); ?>
         
@@ -41,7 +39,7 @@ use \dmstr\bootstrap\Tabs;
                  [
                    'encodeLabels' => false,
                      'items' => [ [
-    'label'   => 'SparePart',
+    'label'   => 'VoyageSparePart',
     'content' => $this->blocks['main'],
     'active'  => true,
 ], ]

@@ -34,6 +34,20 @@ class Voyage extends \app\modules\admin\models\base\Voyage
         ];
     }
 
+    public static function setExpense() {
+        $voyages = Voyage::find()->all();
+        foreach($voyages as $voyage) {
+            if(empty($voyage->expense)) {
+                // Создание записи стоимости для перевозки
+                $expense = \Yii::createObject([
+                    'class'          => Expense::className(),
+                    'voyage_id'      => $voyage->id,
+                ]);
+                $expense->save(false);
+            }
+        }
+    }
+
     /** @inheritdoc */
     public function afterSave($insert, $changedAttributes)
     {
@@ -87,6 +101,13 @@ class Voyage extends \app\modules\admin\models\base\Voyage
                 'voyage_id'      => $this->id,
             ]);
             $unloading->save(false);
+
+            // Создание записи стоимости для перевозки
+            $expense = \Yii::createObject([
+                'class'          => Expense::className(),
+                'voyage_id'      => $this->id,
+            ]);
+            $expense->save(false);
 
             // Создание информации о простое
             $voyageInactionLast = CarInaction::find()->where(['car_id' => $this->car_id ])->orderBy('id DESC')->one();

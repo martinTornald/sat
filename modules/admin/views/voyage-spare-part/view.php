@@ -9,22 +9,22 @@ use dmstr\bootstrap\Tabs;
 
 /**
 * @var yii\web\View $this
-* @var app\modules\admin\models\SparePart $model
+* @var app\modules\admin\models\VoyageSparePart $model
 */
 
-$this->title = 'Spare Part ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Spare Parts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
+$this->title = 'Voyage Spare Part ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Voyage Spare Parts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
 ?>
-<div class="spare-part-view">
+<div class="voyage-spare-part-view">
 
     <!-- menu buttons -->
     <p class='pull-left'>
         <?= Html::a('<span class="glyphicon glyphicon-list"></span> ' . 'List', ['index'], ['class'=>'btn btn-default']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . 'Edit', ['update', 'id' => $model->id],['class' => 'btn btn-info']) ?>
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New' . '
-        Spare Part', ['create'], ['class' => 'btn btn-success']) ?>
+        Voyage Spare Part', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <div class="clearfix"></div>
@@ -41,20 +41,17 @@ $this->params['breadcrumbs'][] = 'View';
 
     
     <h3>
-        <?= $model->name ?>    </h3>
+        <?= $model->id ?>    </h3>
 
 
-    <?php $this->beginBlock('app\modules\admin\models\SparePart'); ?>
+    <?php $this->beginBlock('app\modules\admin\models\VoyageSparePart'); ?>
 
     <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
     			'id',
 			'voyage_id',
-			'name',
-			'plan',
-			'price',
-			'date',
+			'spare_part_id',
     ],
     ]); ?>
 
@@ -70,33 +67,14 @@ $this->params['breadcrumbs'][] = 'View';
 
 
     
-<?php $this->beginBlock('VoyageSpareParts'); ?>
-<div style='position: relative'><div style='position:absolute; right: 0px; top 0px;'>
-  <?= Html::a(
-            '<span class="glyphicon glyphicon-list"></span> ' . 'List All' . ' Voyage Spare Parts',
-            ['voyage-spare-part/index'],
-            ['class'=>'btn text-muted btn-xs']
-        ) ?>
-  <?= Html::a(
-            '<span class="glyphicon glyphicon-plus"></span> ' . 'New' . ' Voyage Spare Part',
-            ['voyage-spare-part/create', 'VoyageSparePart' => ['spare_part_id' => $model->id]],
-            ['class'=>'btn btn-success btn-xs']
-        ); ?>
-</div></div><?php $this->endBlock() ?>
-
-
     <?= Tabs::widget(
                  [
                      'id' => 'relation-tabs',
                      'encodeLabels' => false,
                      'items' => [ [
-    'label'   => '<span class="glyphicon glyphicon-asterisk"></span> SparePart',
-    'content' => $this->blocks['app\modules\admin\models\SparePart'],
+    'label'   => '<span class="glyphicon glyphicon-asterisk"></span> VoyageSparePart',
+    'content' => $this->blocks['app\modules\admin\models\VoyageSparePart'],
     'active'  => true,
-],[
-    'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Voyage Spare Parts</small>',
-    'content' => $this->blocks['VoyageSpareParts'],
-    'active'  => false,
 ], ]
                  ]
     );

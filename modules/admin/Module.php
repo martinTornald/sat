@@ -68,7 +68,7 @@ class Module extends \yii\base\Module
             //'owner'         => ['label' => '<i class="fa fa-street-view"></i> <span>Владельцы</span>',          'url' => ['/admin/owner']],
             //'rate'          => ['label' => '<i class="fa fa-plus-circle"></i> <span>Оплата перевозок</span>',   'url' => ['/admin/rate']],
             //'spare_part'    => ['label' => '<i class="fa fa-cogs"></i> <span>Запчасти</span>',                  'url' => ['/admin/spare-part']],
-            'status'        => ['label' => '<i class="fa fa-check-square"></i> <span>Статусы перевозок</span>', 'url' => ['/admin/status']],
+            //'status'        => ['label' => '<i class="fa fa-check-square"></i> <span>Статусы перевозок</span>', 'url' => ['/admin/status']],
             //'tool'          => ['label' => '<i class="fa fa-wrench"></i> <span>Инструменты</span>',             'url' => ['/admin/tool']],
             //'trailer'       => ['label' => '<i class="fa fa-truck"></i> <span>Прицепы</span>',                  'url' => ['/admin/trailer']],
             //'unloading'     => ['label' => '<i class="fa fa-upload"></i> <span>Разгрузка</span>',               'url' => ['/admin/unloading']],
@@ -156,6 +156,16 @@ class Module extends \yii\base\Module
                         //'icon' => 'credit-card',
                         'label' => 'Оплата водителей',
                         'url' => ['/admin/cost-driver']
+                    ],
+                    'expense'   => [
+                        //'icon' => 'credit-card',
+                        'label' => 'Расходы',
+                        'url' => ['/admin/expense']
+                    ],
+                    'voyage_spare_part'   => [
+                        //'icon' => 'credit-card',
+                        'label' => 'Запчасти',
+                        'url' => ['/admin/voyage-spare-part']
                     ],
                 ],
             ],

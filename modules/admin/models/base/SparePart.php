@@ -8,13 +8,14 @@ use Yii;
  * This is the base-model class for table "spare_part".
  *
  * @property integer $id
- * @property integer $car_id
+ * @property integer $voyage_id
  * @property string $name
  * @property integer $plan
  * @property double $price
  * @property string $date
  *
- * @property \app\modules\admin\models\Car $car
+ * @property \app\modules\admin\models\Voyage $voyage
+ * @property \app\modules\admin\models\VoyageSparePart[] $voyageSpareParts
  */
 class SparePart extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class SparePart extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['car_id', 'plan'], 'integer'],
+            [['voyage_id', 'plan'], 'integer'],
             [['price'], 'number'],
             [['date'], 'safe'],
             [['name'], 'string', 'max' => 255]
@@ -46,8 +47,8 @@ class SparePart extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'car_id' => 'Машина',
-            'name' => 'Наименование',
+            'voyage_id' => 'Перевозка',
+            'name' => 'Наименование запчасти',
             'plan' => 'Запланированная деталь',
             'price' => 'Цена',
             'date' => 'Дата замены',
@@ -57,8 +58,16 @@ class SparePart extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCar()
+    public function getVoyage()
     {
-        return $this->hasOne(\app\modules\admin\models\Car::className(), ['id' => 'car_id']);
+        return $this->hasOne(\app\modules\admin\models\Voyage::className(), ['id' => 'voyage_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVoyageSpareParts()
+    {
+        return $this->hasMany(\app\modules\admin\models\VoyageSparePart::className(), ['spare_part_id' => 'id']);
     }
 }
