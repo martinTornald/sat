@@ -140,25 +140,29 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     ?>
 
     <?= GridView::widget([
+        'layout' => '{summary}{pager}{items}{pager}',
+        'pager' => [
+            'class' => yii\widgets\LinkPager::className(),
+            'firstPageLabel' => 'Первая',
+            'lastPageLabel' => 'Последняя'],
         'dataProvider' => $dataProvider,
-
         'columns' => [
 
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'Start inaction',
+                'label' => 'Начало простоя',
+                'attribute' => 'voyagePrev.id',
                 'value' => 'voyagePrev.unloading.fact'
             ],
             [
-                'attribute' => 'End inaction',
+                'label' => 'Окончание простоя',
+                'attribute' => 'voyageNext.id',
                 'value' => 'voyageNext.loading.fact'
             ],
             [
-                'attribute' => 'Inaction (days)',
-                'value' =>  'inactionTime',
+                'label' => 'Простой в днях',
+                'value' => 'inactionTime',
             ],
-
-
         ],
     ]); ?>
 
@@ -183,11 +187,11 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     $gridColumns = [
         ['class' => 'yii\grid\SerialColumn'],
         [
-            'attribute' => 'Quarter',
+            'label' => 'Квартал ',
             'value' => 'quarter'
         ],
         [
-            'attribute' => 'Inaction (days)',
+            'label' => 'Количество дней простоя',
             'value' => 'count'
         ],
     ];
@@ -197,20 +201,20 @@ $this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view
     ]);
     ?>
 
-    <?php  echo  GridView::widget([
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => $gridColumns
     ]);
 
     echo ExportMenu::widget([
-            'dataProvider' => $dataProvider,
-            'columns' => $gridColumns,
-            'fontAwesome' => true,
-            'dropdownOptions' => [
-                'label' => 'Экспортировать',
-                'class' => 'btn btn-default'
-            ]
-        ]);
+        'dataProvider' => $dataProvider,
+        'columns' => $gridColumns,
+        'fontAwesome' => true,
+        'dropdownOptions' => [
+            'label' => 'Экспортировать',
+            'class' => 'btn btn-default'
+        ]
+    ]);
     ?>
 
     <p class='pull-right'>

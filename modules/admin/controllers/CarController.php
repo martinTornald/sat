@@ -106,7 +106,7 @@ class CarController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load($_POST) && $model->save()) {
-            return $this->redirect(Url::previous());
+            //return $this->redirect(Url::previous());
         } else {
             return $this->render('update', [
                 'model' => $model,
